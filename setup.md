@@ -21,9 +21,10 @@ Ubuntu is the recommended flavour of Linux environment to install.
 ## A file editor
 
 Scripting is another important aspect of this lesson and therefore you will need
-an editor available to you. There are several options available to you:
+an editor available to you. There are several options available to you, so here are
+are a few suggestions:
 * Command-line:
-  * nano: A basic file editor, no syntax highlighting
+  * nano: A basic file editor, no syntax highlighting.
   * vim: A powerful file editor, potentially difficult to use, syntax highlighting
 available through vim plug-ins.
 * Graphical
@@ -32,11 +33,11 @@ though atom package manager.
 
 ## Nextflow
 
-In order to run nextflow workflows, nextflow must be installed on your system.
+In order to run Nextflow workflows, Nextflow must be installed on your system.
 
-You can use either:
-- Option A: Direct installation
-- Option B: Installation via the Conda package manager
+Here are two options for installation:
+- Option A: Direct installation.
+- Option B: Installation via the Conda package manager.
 
 ### Option A: Direct installation
 
@@ -52,9 +53,10 @@ Open the terminal and create an environment for Nextflow.
 conda create -n nextflow-env nextflow
 ```
 
-The conda environment can then be activated using:
-```
+The conda environment can then be activated and deactivated using:
+```bash
 conda activate nextflow-env
+conda deactivate
 ```
 
 ## Git
