@@ -10,7 +10,7 @@
 carpentry: "swc"
 
 # Overall title for pages.
-title: "Lesson Title"
+title: "Nextflow for Reproducible Scientific Analysis"
 
 # Life cycle stage of the lesson
 # possible values: "pre-alpha", "alpha", "beta", "stable"
@@ -29,7 +29,8 @@ kind: "lesson"
 repository: <USERNAME>/<PROJECT>
 
 # Email address, no mailto:
-email: "team@carpentries.org"
+# email: "team@carpentries.org"
+email: "mahesh.panchal@nbis.se"
 
 # Sites.
 amy_site: "https://amy.carpentries.org/workshops"
