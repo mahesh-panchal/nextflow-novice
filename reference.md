@@ -21,6 +21,7 @@ compose tasks, connect them together, and process data.
   * Simple syntax but exensible.
   * Functional logic can be separated from execution engine.
   * Reentrancy.
+  * Staged execution - each task is executed in it's own directory.
   * Open source.
   * Rapidly increasing community.
 
