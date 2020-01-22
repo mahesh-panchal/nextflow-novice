@@ -9,7 +9,7 @@ permalink: index.html  # Is the only page that doesn't follow the pattern /:path
 Nextflow is a workflow manager rapidly increasing in popularity in the scientific community.
 The framework allows scientists to integrate code from any language, separate functional logic 
 from the execution engine, encapsulate software dependencies, and simplify analyses into readable, 
-contained, easy to reproduce projects. It enables high-throughput and data intensive analyses to 
+self-contained, easy to reproduce projects. It enables high-throughput and data intensive analyses to 
 be run locally, or across grid or cloud infrastructures.
 
 <h2>Goal</h2>
