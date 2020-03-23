@@ -1,15 +1,24 @@
 ---
-title: "Introduction"
-teaching: 0
+title: "Introduction to Workflows"
+teaching: 30
 exercises: 0
 questions:
-- "Key question (FIXME)"
+- "What is a workflow?"
+- "Why should I use a workflow?"
+- "What are the advantages of Nextflow?"
 objectives:
-- "First learning objective. (FIXME)"
+- "Describe a workflow."
+- "Explain why workflows are useful."
+- "Ascertain whether Nextflow meets your needs."
 keypoints:
-- "First key point. Brief Answer to questions. (FIXME)"
+- "A workflow is a series of tasks to process data."
+- "A workflow framework is a set of tools that allow you to compose
+tasks, connect them together, and process data."
+- "There are many workflow frameworks available."
+- "Nextflow is reproducible, portable, simple, extensible, well designed, open source, and supported."
 ---
-FIXME
+
+# Workflows
+
 
 {% include links.md %}
-
