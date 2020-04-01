@@ -13,6 +13,8 @@ keypoints:
 FIXME
 # Version control
 
+- https://swcarpentry.github.io/git-novice/
+
 ## Github
 
 * Using `-r` to get a specific branch or revision.
