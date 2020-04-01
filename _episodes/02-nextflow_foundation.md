@@ -14,11 +14,13 @@ keypoints:
 
 # Nextflow foundation
 
+Nextflow is a Domain Specific Language (DSL) designed to write
+workflows rapidly. It is an extension of the computer language
+Groovy, which is a superset of the computer language Java.
+
 This section describes how to write and run a nextflow workflow.
 
 ## Writing a workflow.
-
-Nextflow workflows are written in the computer language Groovy.
 
 A nextflow script has two main components, processes and channels.
 
@@ -50,6 +52,7 @@ A Channel is a structure that passes data asynchronously from one process to ano
 
 A process is a task that executes on a single input set.
 
+ 
 ## Running a workflow.
 
 ```bash
