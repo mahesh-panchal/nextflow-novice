@@ -15,6 +15,8 @@ FIXME
 
 ## Github
 
+* Using `-r` to get a specific branch or revision.
+
 ## Others
 
 
