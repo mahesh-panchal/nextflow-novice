@@ -4,6 +4,8 @@ title: Setup
 
 # Overview
 
+Nextflow can be used on any POSIX compatible system (Linux, OS X, etc).
+
 ## The terminal
 
 Much of the lesson content relies on executing various command-line instructions
@@ -11,12 +13,12 @@ and so a bash terminal window needs to be available to you.
 
 On Unix and Mac OS X, this is already available.
 
-On Windows, assuming you have 64-bit Windows 10, go to 
+On Windows, assuming you have 64-bit Windows 10, go to
 `Control Panel > Programs > Turn Windows Features On Or Off` and enable
 "Windows Subsystem for Linux" and click "OK". Click "Restart now" to reboot
 your computer. Open the Microsoft Store from the Start Menu, and search for
 "Linux". Then click on the "Get the apps" under the "Linux on Windows?" banner.
-Ubuntu is the recommended flavour of Linux environment to install. 
+Ubuntu is the recommended flavour of Linux environment to install.
 
 ## A file editor
 
@@ -59,15 +61,33 @@ conda activate nextflow-env
 conda deactivate
 ```
 
+## Graphviz (optional)
+
+Graphviz is a package of open-source tools for drawing graphs specified in DOT language scripts. This is only used for graphing the workflow task execution, and is not a necessity for the operation of Nextflow.
+
+# Other services (workshop dependent)
+
+These services are only needed for select supplementary material.
+
 ## Git
 
-## Container software
+## Docker
 
-Docker and Singularity are two popular container technologies supported by Nextflow.
+* Docker engine 1.10.x (or later)
 
-### Installing Docker
+## Singularity
 
-### Installing Singularity
+* Singularity 2.5.x (or later, optional)
+
+## Conda
+
+* Conda 4.5 (or later, optional)
+
+## Job Scheduler
+
+## AWS Batch services
+
+## Google services
 
 
 {% include links.md %}
