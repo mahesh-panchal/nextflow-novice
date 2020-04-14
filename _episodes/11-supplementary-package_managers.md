@@ -18,11 +18,11 @@ However, many tools may have complex dependencies which can
 cause conflicts with other tools in the same environment.
 Nextflow supports several systems of package managers that
 isolate tools and their dependencies into separated environments
-preventing the majority of conflicts.
+preventing the majority of software conflicts.
 
 Ideally, package management should be handled in the configuration
 file rather than in the nextflow script. This allows users
-to tailor execution to their computing environment.
+to tailor software execution to their computing environment.
 
 ## Environment Modules
 
@@ -34,11 +34,11 @@ Nextflow via the `module` directive in the `process` scope.
 ```groovy
 process blast {
 
-	module 'ncbi-blast/2.9.0'
+    module 'ncbi-blast/2.9.0'
 
-	"""
-	blast -version
-	"""
+    """
+    blast -version
+    """
 }
 ```
 
@@ -46,13 +46,13 @@ The `module` directive can also be assigned in a config file:
 ```
 process {
 
-	// available to all processes
+    // available to all processes
     module = 'cluster-utils/1.2.3'
 
-	// Override the module directive above for a specific process
-	withName: blast {
-		module = 'ncbi-blast/2.9.0:gnu-parallel/3.5'
-	}
+    // Override the module directive above for a specific process
+    withName: blast {
+        module = 'ncbi-blast/2.9.0:gnu-parallel/3.5'
+    }
 }
 ```
 
@@ -92,20 +92,20 @@ Both methods are supported in Nextflow:
 ```groovy
 process blastp {
 
-	conda 'blast=2.9.0'
+    conda 'blast=2.9.0'
 
-	"""
-	blastp -version
-	"""
+    """
+    blastp -version
+    """
 }
 
 process blastn {
 
-	conda '/path/to/environment.yml'
+    conda '/path/to/environment.yml'
 
-	"""
-	blastn -version
-	"""
+    """
+    blastn -version
+    """
 }
 ```
 
@@ -116,11 +116,11 @@ the full path to the environment.
 ```groovy
 process blastp {
 
-	conda '/path/to/existing/conda/env'
+    conda '/path/to/existing/conda/env'
 
-	"""
-	blastp -version
-	"""
+    """
+    blastp -version
+    """
 }
 ```
 
@@ -128,16 +128,15 @@ The `conda` directive can also be used in the config file.
 ```
 process {
 
-	// available to all processes
+    // available to all processes
     conda = 'cluster-utils/1.2.3'
 
-	// Override the conda directive above for a specific process.
-	withName: blastn {
-		conda = 'blast=2.9.0 gnu-parallel=3.5'
-	}
+    // Override the conda directive above for a specific process.
+    withName: blastn {
+        conda = 'blast=2.9.0 gnu-parallel=3.5'
+    }
 }
 ```
-
 
 ## Docker
 
