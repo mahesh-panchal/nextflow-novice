@@ -60,7 +60,8 @@ concepts of the Groovy language.
     ~~~
     emptyMap = [:]                      // an empty map
     mymap = [ name : "Steve", age: 43, likes: ['walks','cooking','coding']]
-    println mymap['name']               // access values using quoted key.
+    mymap.age = 44                      // values can be accessed using map property notation.
+    println mymap['name']               // alternatively values can be accessed using quoted keys.
     ~~~
     {: .language-groovy}
 - Groovy supports common control structures such as if/else tests,
@@ -125,8 +126,9 @@ from various sources. Nextflow was developed with a strong emphasis
 on supporting bioinformatics, and as such includes methods for
 supporting common file formats like fasta and fastq. Channels send
 data in a first in, first out manner (FIFO), however data may arrive
-at the next channel in a different order due to process execution time,
-or manipulation of channel values by channel operators.
+at the next channel in a different order (asynchrony) due to
+process execution time, or manipulation of channel values by
+channel operators.
 
 A process is a task that executes a user script. The
 script can be written in any computer language, although the default
@@ -134,7 +136,6 @@ is bash. A different script interpreter can be used by including
 a "shebang" (`#!`) followed by the path to the interpreter.
 Each task defined by a process is executed independently,
 and in isolation, and so input must be communicated using channels.
-
 
 Example (`example.nf`):
 ~~~
@@ -179,12 +180,12 @@ out_ch.view()
 ## Running a workflow.
 
 A Nextflow workflow is executed using the `nextflow run <script.nf>` command. Each task is executed locally (on your computer) by default,
-and expects all the commands in your workflow tasks to be
-available on the command line. Although this is suitable for small scale
-data processing, Nextflow integrates support for several third-party
-softwares enabling large scale data processing through various package
-management tools, job schedulers, and distributed compute infrastructure
-tools (See supplementary materials).
+and expects all the commands in your process tasks to be
+available on the command line. While local execution is suitable for
+small scale data processing, Nextflow integrates support for several
+third-party softwares enabling large scale data processing through
+various package management tools, job schedulers, and distributed
+compute infrastructure tools (See supplementary materials).
 
 ~~~
 $ nextflow run test.nf
@@ -207,5 +208,8 @@ executor >  local (8)
 
 ~~~
 {: .language-bash}
+
+Nextflow is also able to execute workflows from version control
+repositories.
 
 {% include links.md %}
