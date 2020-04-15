@@ -66,6 +66,7 @@ concepts of the Groovy language.
 - Groovy supports common control structures such as if/else tests,
 switch/case tests, for loops, and while loops.
     ~~~
+    // if / else test
     x = false
     if ( !x ) {
         return 1
@@ -73,6 +74,7 @@ switch/case tests, for loops, and while loops.
         return 0
     }
 
+    // switch / case test
     switch (x) {
         case "found foo":
             result = "Got foo"
@@ -86,11 +88,13 @@ switch/case tests, for loops, and while loops.
             result = "default"
     }
 
+    // for loop (other variants exist)
     String message = ''
     for (int i = 0; i < 5; i++) {
         message += 'Hi '
     }
 
+    // while loop
     y = 5
     while ( y > 0 ){
         println "Are we there yet?"
