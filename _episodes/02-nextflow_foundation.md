@@ -177,6 +177,20 @@ out_ch.view()
 ~~~
 {: .language-groovy}
 
+> ## Alter the code
+>
+> - Change the channel input to use the numbers 5, 10, and 15.
+>
+> > ## Solution
+> >
+> > The code should now look like this.
+> > ~~~
+> > number_ch = Channel.from(5,10,15)
+> > ~~~
+> > {: .language-groovy}
+> {: .solution}
+{: .challenge}
+
 ## Running a workflow.
 
 A Nextflow workflow is executed using the `nextflow run <script.nf>` command. Each task is executed locally (on your computer) by default,
