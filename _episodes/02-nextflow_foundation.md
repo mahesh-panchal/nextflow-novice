@@ -22,7 +22,7 @@ code or use any library for the JVM platform.
 
 This section describes how to write and run a nextflow workflow.
 
-## Writing a workflow.
+## Groovy basics
 
 > ## What's your scripting language experience?
 >
@@ -104,22 +104,37 @@ switch/case tests, for loops, and while loops.
     {: .language-groovy}
 
 Groovy is very syntax-rich and supports many more operations. A full
-description of Groovy semantics can be found in the  
-[Groovy Documentation](https://groovy-lang.org/semantics.html).
+description of Groovy semantics can be found in the [Groovy Documentation](https://groovy-lang.org/semantics.html).
 
 > ## Can I do X in Groovy / Nextflow too?
 >
-> Are there other data and control structures that you commonly
+> - Are there other data and control structures that you commonly
 > use in your analyses?
+> - What kind of things would you like to do in your computational
+> pipeline?
 {: .discussion}
 
+## Writing a workflow
+
 To ease the writing of computational pipelines Nextflow introduces two
-other data structures; channels, and processes.
+high-level data structures; channels, and processes.
+
 A channel is a data-flow object that passes data asynchronously from
-one process to another.
+one process to another. Channels provide methods for reading in data
+from various sources. Nextflow was developed with a strong emphasis
+on supporting bioinformatics, and as such includes methods for
+supporting common file formats like fasta and fastq. Channels send
+data in a first in, first out manner (FIFO), however data may arrive
+at the next channel in a different order due to process execution time,
+or manipulation of channel values by channel operators.
+
 A process is a task that executes a user script. The
 script can be written in any computer language, although the default
-is bash.
+is bash. A different script interpreter can be used by including
+a "shebang" (`#!`) followed by the path to the interpreter.
+Each task defined by a process is executed independently,
+and in isolation, and so input must be communicated using channels.
+
 
 Example (`example.nf`):
 ~~~
@@ -127,26 +142,39 @@ Example (`example.nf`):
 
 number_ch = Channel.from(1,2,3,4)
 
-process echo {
+process Shell_Echo {
 
     input:
-    val number from number_ch
+    val max from number_ch
+
+    output:
+    stdout into r_analysis_ch
+
+    script:
+    """
+    echo {0..$max} | tr " " ","
+    """
+
+}
+
+process R_Summary {
+
+    input:
+    val numbers from r_analysis_ch
 
     output:
     stdout into out_ch
 
     script:
     """
-    echo "Number: $number"
+    #! /usr/bin/env Rscript
+    summary(c($numbers))
     """
-
 }
 
 out_ch.view()
 ~~~
 {: .language-groovy}
-
-Each task defined by a process is executed independently, and in isolation, so and input must be communicated using channels.
 
 ## Running a workflow.
 
@@ -161,16 +189,22 @@ tools (See supplementary materials).
 ~~~
 $ nextflow run test.nf
 N E X T F L O W  ~  version 20.01.0
-Launching `example.nf` [naughty_ramanujan] - revision: d06de0a119
-executor >  local (4)
-[01/cf5b42] process > echo [100%] 4 of 4 ✔
-Number: 2
+Launching `test.nf` [marvelous_ride] - revision: 614fc2b804
+executor >  local (8)
+[ef/b6e345] process > Shell_Echo [100%] 4 of 4 ✔
+[39/e0e9c9] process > R_Summary  [100%] 4 of 4 ✔
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.
+    0.0     0.5     1.0     1.0     1.5     2.0
 
-Number: 1
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.
+   0.00    0.25    0.50    0.50    0.75    1.00
 
-Number: 3
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.
+   0.00    0.75    1.50    1.50    2.25    3.00
 
-Number: 4
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.
+      0       1       2       2       3       4
+
 ~~~
 {: .language-bash}
 
