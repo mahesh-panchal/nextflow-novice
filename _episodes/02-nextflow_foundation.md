@@ -34,16 +34,16 @@ This section describes how to write and run a nextflow workflow.
 >    - Groovy
 {: .discussion}
 
-Before writing a workflow, we need to understand some fundamental
+Before writing a workflow, here are some fundamental
 concepts of the Groovy language.
 
 - Variables are assigned to using `=` and can have any value.
     ~~~
-    var = 1                           // Integer
-    var = -3.1499392                  // Floating point number
-    var = false                       // Boolean
-    var = "Hello world"               // String
-    var = new java.util.Date()        // Object - Abstract data structure
+    myvar = 1                           // Integer
+    myvar = -3.1499392                  // Floating point number
+    myvar = false                       // Boolean
+    myvar = "Hello world"               // String
+    myvar = new java.util.Date()        // Object - Abstract data structure
     ~~~
     {: .language-groovy}
 - Lists (also known as arrays) are defined using the square bracket `[]` notation.
@@ -63,9 +63,56 @@ concepts of the Groovy language.
     println mymap['name']            // access values using quoted key.
     ~~~
     {: .language-groovy}
+- Groovy supports common control structures such as if/else tests,
+switch/case tests, for loops, and while loops.
+    ~~~
+    x = false
+    if ( !x ) {
+        return 1
+    } else {
+        return 0
+    }
 
-A nextflow script has two main components; channels, and processes.
-A channel is a data-flow object that passes data asynchronously from one process to another.
+    switch (x) {
+        case "found foo":
+            result = "Got foo"
+            // continues to following cases
+
+        case Number:
+            result = "Number"
+            break          // stops at this case
+
+        default:
+            result = "default"
+    }
+
+    String message = ''
+    for (int i = 0; i < 5; i++) {
+        message += 'Hi '
+    }
+
+    y = 5
+    while ( y > 0 ){
+        println "Are we there yet?"
+    }
+    println "We've arrived!"
+    ~~~
+    {: .language-groovy}
+
+Groovy is very syntax-rich and supports many more operations. A full
+description of Groovy semantics can be found in the  
+[Groovy Documentation](https://groovy-lang.org/semantics.html).
+
+> ## Can I do X in Groovy / Nextflow too?
+>
+> Are there other data and control structures that you commonly
+> use in your analyses?
+{: .discussion}
+
+To ease the writing of computational pipelines Nextflow introduces two
+other data structures; channels, and processes.
+A channel is a data-flow object that passes data asynchronously from
+one process to another.
 A process is a task that executes a user script. The
 script can be written in any computer language, although the default
 is bash.
