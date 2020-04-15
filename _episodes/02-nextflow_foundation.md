@@ -45,7 +45,7 @@ concepts of the Groovy language.
     var = "Hello world"               // String
     var = new java.util.Date()        // Object - Abstract data structure
     ~~~
-    {: .language-r}
+    {: .language-groovy}
 - Lists (also known as arrays) are defined using the square bracket `[]` notation.
     ~~~
     emptylist = []                   // an empty list
@@ -55,14 +55,14 @@ concepts of the Groovy language.
     println mixedList.size()         // prints the size
     println mixedList[0]             // prints 1
     ~~~
-    {: .language-r}
+    {: .language-groovy}
 - Maps ( also known as associative arrays ) are defined using the `[:]` literal. They associate a unique string with a value, and are commonly referred to as key-value pairs.
     ~~~
     emptyMap = [:]                   // an empty map
     mymap = [ name : "Steve", age: 43, likes: ['walks','cooking','coding']]
     println mymap['name']            // access values using quoted key.
     ~~~
-    {: .language-r}
+    {: .language-groovy}
 
 A nextflow script has two main components; channels, and processes.
 A channel is a data-flow object that passes data asynchronously from one process to another.
