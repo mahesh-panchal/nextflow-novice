@@ -93,7 +93,7 @@ process echo {
 
 out_ch.view()
 ~~~
-{: .source}
+{: .language-nextflow}
 
 Each task defined by a process is executed independently, and in isolation, so and input must be communicated using channels.
 

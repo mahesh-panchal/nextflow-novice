@@ -44,6 +44,7 @@ $color-testimonial: #fc8dc1 !default;
 .groovy, .language-groovy     { @include cdSetup($color-source); }
 .make, .language-make     { @include cdSetup($color-source); }
 .matlab, .language-matlab { @include cdSetup($color-source); }
+.nextflow, .language-nextflow { @extend .language-groovy; }
 .python, .language-python { @include cdSetup($color-source); }
 .r, .language-r           { @include cdSetup($color-source); }
 .sql, .language-sql       { @include cdSetup($color-source); }
@@ -55,6 +56,7 @@ $color-testimonial: #fc8dc1 !default;
 .groovy::before, .language-groovy::before,
 .make::before, .language-make::before,
 .matlab::before, .language-matlab::before,
+.nextflow::before, .language-nextflow::before,
 .python::before, .language-python::before,
 .r::before, .language-r::before,
 .sql::before, .language-sql::before {
@@ -71,6 +73,7 @@ $color-testimonial: #fc8dc1 !default;
 .groovy::before, .language-groovy::before { content: "Groovy"; }
 .make::before, .language-make::before { content: "Make"; }
 .matlab::before, .language-matlab::before { content: "Matlab"; }
+.nextflow::before, .language-nextflow::before { content: "Nextflow"; }
 .python::before, .language-python::before { content: "Python"; }
 .r::before, .language-r::before { content: "R"; }
 .sql::before, .language-sql::before { content: "SQL"; }
