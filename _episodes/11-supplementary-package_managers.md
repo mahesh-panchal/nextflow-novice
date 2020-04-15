@@ -127,7 +127,7 @@ process blastp {
     """
 }
 ~~~
-{: .language-nextflow}
+{: .source}
 
 The `conda` directive can also be used in the config file.
 ~~~
