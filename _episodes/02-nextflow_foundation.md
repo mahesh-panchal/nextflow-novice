@@ -48,19 +48,19 @@ concepts of the Groovy language.
     {: .language-groovy}
 - Lists (also known as arrays) are defined using the square bracket `[]` notation.
     ~~~
-    emptylist = []                   // an empty list
+    emptylist = []                      // an empty list
     // Lists can contain duplicates, and the values can be of any type.
     mixedList = [1, 1, 'string', true, null, 5 as byte]
-    mixedList.add("new value")       // adds "new value" to the end of mixedList
-    println mixedList.size()         // prints the size
-    println mixedList[0]             // prints 1
+    mixedList.add("new value")          // adds "new value" to the end of mixedList
+    println mixedList.size()            // prints the size
+    println mixedList[0]                // prints 1
     ~~~
     {: .language-groovy}
 - Maps ( also known as associative arrays ) are defined using the `[:]` literal. They associate a unique string with a value, and are commonly referred to as key-value pairs.
     ~~~
-    emptyMap = [:]                   // an empty map
+    emptyMap = [:]                      // an empty map
     mymap = [ name : "Steve", age: 43, likes: ['walks','cooking','coding']]
-    println mymap['name']            // access values using quoted key.
+    println mymap['name']               // access values using quoted key.
     ~~~
     {: .language-groovy}
 - Groovy supports common control structures such as if/else tests,
