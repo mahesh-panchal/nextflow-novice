@@ -96,7 +96,7 @@ switch/case tests, for loops, and while loops.
 
     // while loop
     y = 5
-    while ( y > 0 ){
+    while ( y-- > 0 ){
         println "Are we there yet?"
     }
     println "We've arrived!"
