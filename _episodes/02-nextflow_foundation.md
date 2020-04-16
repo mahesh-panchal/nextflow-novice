@@ -37,6 +37,16 @@ This section describes how to write and run a nextflow workflow.
 Before writing a workflow, here are some fundamental
 concepts of the Groovy language.
 
+- Single line comments (lines not meant to be executed) start
+with `//`. Multi-line comments are nested between `/*` and `*/` tags.
+    ~~~
+    // This is a single line comment. Everything after the // is ignored.
+    /*
+        This is a multi-line comment.
+        Multiple lines can be prevented from being interpreted.
+    */
+    ~~~
+    {: .language-groovy}
 - Variables are assigned to using `=` and can have any value.
     ~~~
     myvar = 1                           // Integer
@@ -179,16 +189,21 @@ out_ch.view()
 
 > ## Write a nextflow script
 >
-> 1. Create and save a file `myscript.nf` with the directive to use the nextflow interpreter
-> > ## Solution
+> - Create and save a file `myscript.nf` with the directive
+> to use the nextflow interpreter.
+>
+> > ## Solution
 > >
 > > The `myscript.nf` script should now look like this:
+> >
 > > ~~~
 > > #! /usr/bin/env nextflow
 > > ~~~
 > > {: .language-groovy}
 > {: .solution}
-> 2. Add a channel `word_ch` to the script that sends the words, "This","is","my","nextflow","script" into the channel.
+>
+> - Add a channel `word_ch` to the script that sends the words, "This","is","my","nextflow","script" into the channel.
+>
 > > ## Solution
 > >
 > > ~~~
@@ -198,7 +213,9 @@ out_ch.view()
 > > ~~~
 > > {: .language-groovy}
 > {: .solution}
-> 3. Use the `view` method to display the content of the `word_ch` channel.
+>
+> - Use the `view` method to display the content of the `word_ch` channel.
+>
 > > ## Solution
 > >
 > > ~~~
@@ -209,9 +226,11 @@ out_ch.view()
 > > ~~~
 > > {: .language-groovy}
 > {: .solution}
-> 4. Add a process `display_words` the to script. Take input
-> from the `word_ch` channel, and send output to the `out_ch` channel.
+>
+> - Add a process `Display_Words` the to script. Take input
+> from the `word_ch` channel.
 > Use the shell command `echo` to print the each word.
+>
 > > ## Solution
 > >
 > > ~~~
@@ -220,13 +239,10 @@ out_ch.view()
 > > word_ch = Channel.from("This","is","my","nextflow","script")
 > > word_ch.view()
 > >
-> > process display_words {
+> > process Display_Words {
 > >
 > >     input:
 > >     val word from word_ch
-> >
-> >     output:
-> >     stdout into out_ch
 > >
 > >     script:
 > >     """
@@ -241,7 +257,8 @@ out_ch.view()
 
 ## Running a workflow.
 
-A Nextflow workflow is executed using the `nextflow run <script.nf>` command. Each task is executed locally (on your computer) by default,
+A Nextflow workflow is executed using the `nextflow run <script.nf>`
+command. Each task is executed locally (on your computer) by default,
 and expects all the commands in your process tasks to be
 available on the command line. While local execution is suitable for
 small scale data processing, Nextflow integrates support for several
