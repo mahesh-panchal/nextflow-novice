@@ -177,18 +177,71 @@ out_ch.view()
 ~~~
 {: .language-groovy}
 
-> ## Alter the code
+> ## Write a nextflow script
 >
-> - Change the channel input to use the numbers 5, 10, and 15.
+> 1. Create and save a file `myscript.nf` with the directive to use the nextflow interpreter
 >
 > > ## Solution
 > >
-> > The code should now look like this.
+> > The `myscript.nf` script should now look like this:
 > > ~~~
-> > number_ch = Channel.from(5,10,15)
+> > #! /usr/bin/env nextflow
 > > ~~~
 > > {: .language-groovy}
 > {: .solution}
+>
+> 2. Add a channel `word_ch` to the script that sends the words, "This","is","my","nextflow","script" into the channel.
+>
+> > ## Solution
+> >
+> > ~~~
+> > #! /usr/bin/env nextflow
+> >
+> > word_ch = Channel.from("This","is","my","nextflow","script")
+> > ~~~
+> > {: .language-groovy}
+> {: .solution}
+>
+> 3. Use the `view` method to display the content of the `word_ch` channel.
+>
+> > ## Solution
+> >
+> > ~~~
+> > #! /usr/bin/env nextflow
+> >
+> > word_ch = Channel.from("This","is","my","nextflow","script")
+> > word_ch.view()
+> > ~~~
+> > {: .language-groovy}
+>
+> 4. Add a process `display_words` the to script. Take input
+> from the `word_ch` channel, and send output to the `out_ch` channel.
+> Use the shell command `echo` to print the each word.
+>
+> > ## Solution
+> >
+> > ~~~
+> > #! /usr/bin/env nextflow
+> >
+> > word_ch = Channel.from("This","is","my","nextflow","script")
+> > word_ch.view()
+> >
+> > process display_words {
+> >
+> >     input:
+> >     val word from word_ch
+> >
+> >     output:
+> >     stdout into out_ch
+> >
+> >     script:
+> >     """
+> >     echo $word
+> >     """
+> >
+> > }
+> > ~~~
+> > {: .language-groovy}  
 {: .challenge}
 
 ## Running a workflow.
