@@ -180,7 +180,6 @@ out_ch.view()
 > ## Write a nextflow script
 >
 > 1. Create and save a file `myscript.nf` with the directive to use the nextflow interpreter
->
 > > ## Solution
 > >
 > > The `myscript.nf` script should now look like this:
@@ -189,9 +188,7 @@ out_ch.view()
 > > ~~~
 > > {: .language-groovy}
 > {: .solution}
->
 > 2. Add a channel `word_ch` to the script that sends the words, "This","is","my","nextflow","script" into the channel.
->
 > > ## Solution
 > >
 > > ~~~
@@ -201,9 +198,7 @@ out_ch.view()
 > > ~~~
 > > {: .language-groovy}
 > {: .solution}
->
 > 3. Use the `view` method to display the content of the `word_ch` channel.
->
 > > ## Solution
 > >
 > > ~~~
@@ -213,11 +208,10 @@ out_ch.view()
 > > word_ch.view()
 > > ~~~
 > > {: .language-groovy}
->
+> {: .solution}
 > 4. Add a process `display_words` the to script. Take input
 > from the `word_ch` channel, and send output to the `out_ch` channel.
 > Use the shell command `echo` to print the each word.
->
 > > ## Solution
 > >
 > > ~~~
@@ -242,6 +236,7 @@ out_ch.view()
 > > }
 > > ~~~
 > > {: .language-groovy}  
+> {: .solution}
 {: .challenge}
 
 ## Running a workflow.
