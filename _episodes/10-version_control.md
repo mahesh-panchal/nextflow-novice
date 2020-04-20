@@ -1,13 +1,15 @@
 ---
-title: "Supplementary - Nextflow and Version control"
+title: "Supplementary: Version control"
 teaching: 0
 exercises: 0
 questions:
-- "Key question (FIXME)"
+- "How does Nextflow integrate with version control?"
 objectives:
-- "First learning objective. (FIXME)"
+- "Demonstrate how a workflow can be used from a version control repository."
+- "Demonstrate how to use version control to develop a workflow."
 keypoints:
-- "First key point. Brief Answer to questions. (FIXME)"
+- "Nextflow can run workflows from version control platforms."
+- "Version control can aid workflow development."
 ---
 
 FIXME
