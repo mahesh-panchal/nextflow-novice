@@ -1,15 +1,19 @@
 ---
-title: "Nextflow foundation"
-teaching: 30
-exercises: 0
+title: "The Nextflow Language"
+teaching: 40
+exercises: 20
 questions:
-- "How to I write a nextflow script"
-- "How can I run a nextflow script"
+- "What language is nextflow written in?"
+- "How to I write a nextflow script?"
+- "How can I run a nextflow script?"
 objectives:
-- "Write a simple nextflow workflow"
-- "Run a simple nextflow workflow"
+- "Explain Groovy syntax"
+- "Write a simple Nextflow workflow"
+- "Run a simple Nextflow workflow"
 keypoints:
-- FIXME
+- "Nextflow is written in the Groovy computer language."
+- "Channels and Processes are the fundamental data structures of Nextflow."
+- "A workflow script is run using `nextflow run <script.nf>`."
 ---
 
 # Nextflow foundation
@@ -22,7 +26,7 @@ code or use any library for the JVM platform.
 
 This section describes how to write and run a nextflow workflow.
 
-## Groovy basics
+## The Groovy language
 
 > ## What's your scripting language experience?
 >
@@ -42,12 +46,13 @@ with `//`. Multi-line comments are nested between `/*` and `*/` tags.
     ~~~
     // This is a single line comment. Everything after the // is ignored.
     /*
-        This is a multi-line comment.
-        Multiple lines can be prevented from being interpreted.
+        Comments can also
+        span multiple
+        lines.
     */
     ~~~
     {: .language-groovy}
-- Variables are assigned to using `=` and can have any value.
+- Variables are assigned using `=` and can have any value.
     ~~~
     myvar = 1                           // Integer
     myvar = -3.1499392                  // Floating point number
@@ -66,7 +71,7 @@ with `//`. Multi-line comments are nested between `/*` and `*/` tags.
     println mixedList[0]                // prints 1
     ~~~
     {: .language-groovy}
-- Maps ( also known as associative arrays ) are defined using the `[:]` literal. They associate a unique string with a value, and are commonly referred to as key-value pairs.
+- Maps (also known as associative arrays) are defined using the `[:]` literal. They associate a unique string with a value, and are commonly referred to as key-value pairs.
     ~~~
     emptyMap = [:]                      // an empty map
     mymap = [ name : "Steve", age: 43, likes: ['walks','cooking','coding']]
@@ -142,9 +147,7 @@ channel operators.
 
 A process is a task that executes a user script. The
 script can be written in any computer language, although the default
-is bash. A different script interpreter can be used by including
-a "shebang" (`#!`) followed by the path to the interpreter.
-Each task defined by a process is executed independently,
+is bash. Each task defined by a process is executed independently,
 and in isolation, and so input must be communicated using channels.
 
 Example (`example.nf`):
@@ -153,34 +156,19 @@ Example (`example.nf`):
 
 number_ch = Channel.from(1,2,3,4)
 
-process Shell_Echo {
+process Sequence {
 
     input:
     val max from number_ch
-
-    output:
-    stdout into r_analysis_ch
-
-    script:
-    """
-    echo {0..$max} | tr " " ","
-    """
-
-}
-
-process R_Summary {
-
-    input:
-    val numbers from r_analysis_ch
 
     output:
     stdout into out_ch
 
     script:
     """
-    #! /usr/bin/env Rscript
-    summary(c($numbers))
+    echo {0..$max}
     """
+
 }
 
 out_ch.view()
@@ -270,25 +258,21 @@ compute infrastructure tools (See supplementary materials).
 $ nextflow run test.nf
 N E X T F L O W  ~  version 20.01.0
 Launching `test.nf` [marvelous_ride] - revision: 614fc2b804
-executor >  local (8)
-[ef/b6e345] process > Shell_Echo [100%] 4 of 4 ✔
-[39/e0e9c9] process > R_Summary  [100%] 4 of 4 ✔
-   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.
-    0.0     0.5     1.0     1.0     1.5     2.0
+executor >  local (4)
+[3e/7b764f] process > Sequence [100%] 4 of 4 ✔
+0 1 2
 
-   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.
-   0.00    0.25    0.50    0.50    0.75    1.00
+0 1
 
-   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.
-   0.00    0.75    1.50    1.50    2.25    3.00
+0 1 2 3 4
 
-   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.
-      0       1       2       2       3       4
+0 1 2 3
 
 ~~~
 {: .language-bash}
 
-Nextflow is also able to execute workflows from version control
-repositories.
+If given a path to a version control repository, Nextflow can
+download and execute a workflow from it.
+
 
 {% include links.md %}
