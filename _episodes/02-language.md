@@ -144,7 +144,7 @@ process execution time, or manipulation of channel values by
 channel operators.
 
 A process is a task that executes a user script. The user
-script can be written in any computer language, although the default
+script can be written in any interpreted language, although the default
 is bash. Each task defined by a process is executed independently,
 and in isolation, and so input must be communicated using channels.
 
