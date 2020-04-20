@@ -1,13 +1,14 @@
 ---
-title: "Supplementary - Nextflow and Package Managers"
+title: "Supplementary: Package Managers - Docker"
 teaching: 0
 exercises: 0
 questions:
-- "Key question (FIXME)"
+- "How can I use software from docker containers?"
 objectives:
-- "First learning objective. (FIXME)"
+- "Demonstrate how to use Nextflow with Docker."
 keypoints:
-- "First key point. Brief Answer to questions. (FIXME)"
+- "Docker must be enabled using `docker.enabled=true` in the configuration."
+- "The `container` directive can be used to load a docker image."
 ---
 
 # Package Managers
@@ -24,134 +25,23 @@ Ideally, package management should be handled in the configuration
 file rather than in the nextflow script. This allows users
 to tailor software execution to their computing environment.
 
-## Environment Modules
-
-[Environment Modules](http://modules.sourceforge.net/)
-is a package manager that loads tools via
-the `module load <package>` command. Modules are supported in
-Nextflow via the `module` directive in the `process` scope.
-
-~~~
-process blast {
-
-    module 'ncbi-blast/2.9.0'
-
-    """
-    blast -version
-    """
-}
-~~~
-{: .source}
-
-The `module` directive can also be assigned in a config file:
-~~~
-process {
-
-    // available to all processes
-    module = 'cluster-utils/1.2.3'
-
-    // Override the module directive above for a specific process
-    withName: blast {
-        module = 'ncbi-blast/2.9.0:gnu-parallel/3.5'
-    }
-}
-~~~
-{: .source}
-
-Multiple packages can be loaded at the same time by separating the
-package names with a colon (`:`).
-
-Note that environment modules are often centrally managed (e.g. by
-cluster administrators) which may limit tools available to the user.
-
-## Conda
-
-[Conda](https://docs.conda.io/en/latest/) is another package, dependency and environment manager. Of particular interest is the
-[Bioconda](https://bioconda.github.io/) channel which specialises
-in bioinformatic software. Support for Conda is provided via the
-`conda` directive in the `process` scope.
-
-A user will often create an environment for themselves to use tools.
-e.g.
-~~~
-# Create environment via commands
-$ conda create -n blast_env blast=2.9.0
-
-# Or create environment via yaml files
-$ cat environment.yml
-name: blast_env
-channels:
-  - conda-forge
-  - bioconda
-  - defaults
-
-dependencies:
-  - blast=2.9.0
-$ conda env create -f environment.yml
-~~~
-{: .language-bash}
-
-Both methods are supported in Nextflow:
-~~~
-process blastp {
-
-    conda 'blast=2.9.0'
-
-    """
-    blastp -version
-    """
-}
-
-process blastn {
-
-    conda '/path/to/environment.yml'
-
-    """
-    blastn -version
-    """
-}
-~~~
-{: .source}
-
-This will create the environment in the `conda.cacheDir` directory (the default location is the `conda` folder in the working directory).
-
-The use of existing environments is also supported by providing
-the full path to the environment.
-~~~
-process blastp {
-
-    conda '/path/to/existing/conda/env'
-
-    """
-    blastp -version
-    """
-}
-~~~
-{: .source}
-
-The `conda` directive can also be used in the config file.
-~~~
-process {
-
-    // available to all processes
-    conda = 'cluster-utils/1.2.3'
-
-    // Override the conda directive above for a specific process.
-    withName: blastn {
-        conda = 'blast=2.9.0 gnu-parallel=3.5'
-    }
-}
-~~~~
-{: .source}
-
 ## Docker
 
 [Docker](https://www.docker.com/) is platform that provides a
 standardised packaging format known as container images. A container
-image is a unit of software that packages up
-code and all its dependencies so the application runs the same regardless
-of the underlying infrastructure. The [Docker Engine](https://www.docker.com/products/container-runtime) needs to be installed to run
-Docker container images on your computer infrastructure.
+image is a unit of software that packages up code and all its
+dependencies so the application runs the same regardless
+of the underlying infrastructure. The
+[Docker Engine](https://www.docker.com/products/container-runtime)
+needs to be installed to run Docker container images on your
+computer infrastructure.
+
+Typically, images are run as containers in which your commands
+can be executed.
+~~~
+$ docker run --rm --name fastqc quay.io/biocontainers/fastqc:0.11.9--0
+~~~
+{: .language-bash}
 
 Container images are built according to recipes prescribed in a
 `Dockerfile`. A base image is used a starting point, which could
@@ -193,26 +83,14 @@ CMD [ "SPADE.py" ]
 
 When a container image is built, it is stored in a repository, either
 locally or online. Nextflow is able to retrieve container images for use
-using the `docker pull` instruction at the location
+using the `docker pull` instruction at the path
 (`'docker-repository/image-name:tag'`) provided by the
 `container` directive in the `process` scope. Images should preferably
 be stored in an online repository to enable access for others.
 
-~~~
-process blastp {
-
-    container 'quay.io/biocontainers/blast:2.9.0--pl526h3066fca_4'
-
-    """
-    blastp -version
-    """
-}
-~~~
-{: .source}
-
-As with other software package managers, containers can also
-be defined in the config file. However, an additional setting
-is needed to use the Docker engine.
+An additional `docker` scope is provided by Nextflow
+which allows you to supply extra parameters to Docker. In order
+to use a container image with Docker, it must be enabled.   
 ~~~
 docker {
     enabled = true
@@ -229,8 +107,5 @@ process {
 }
 ~~~
 {: .source}
-
-## Singularity
-
 
 {% include links.md %}
