@@ -274,5 +274,16 @@ executor >  local (4)
 If given a path to a version control repository, Nextflow can
 download and execute a workflow from it.
 
+> ## Run your own workflows
+>
+> - Run your `myscript.nf` script
+>
+> > ## Solution
+> >
+> > ~~~
+> > $ nextflow run myscript.nf
+> > ~~~
+> {: .language-bash}
+{: .challenge}
 
 {% include links.md %}
