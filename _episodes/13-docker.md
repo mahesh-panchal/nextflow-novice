@@ -39,7 +39,8 @@ computer infrastructure.
 Typically, images are run as containers in which your commands
 can be executed.
 ~~~
-$ docker run --rm --name fastqc quay.io/biocontainers/fastqc:0.11.9--0
+$ docker run --rm --name fastqc quay.io/biocontainers/fastqc:0.11.9--0 fastqc --version
+FastQC v0.11.9
 ~~~
 {: .language-bash}
 
