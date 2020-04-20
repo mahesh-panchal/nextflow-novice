@@ -4,19 +4,17 @@ teaching: 40
 exercises: 20
 questions:
 - "What language is nextflow written in?"
-- "How to I write a nextflow script?"
+- "How do I write a nextflow script?"
 - "How can I run a nextflow script?"
 objectives:
-- "Explain Groovy syntax"
-- "Write a simple Nextflow workflow"
-- "Run a simple Nextflow workflow"
+- "Describe the Groovy syntax."
+- "Write a Nextflow workflow."
+- "Run a Nextflow workflow."
 keypoints:
 - "Nextflow is written in the Groovy computer language."
 - "Channels and Processes are the fundamental data structures of Nextflow."
 - "A workflow script is run using `nextflow run <script.nf>`."
 ---
-
-# Nextflow foundation
 
 Nextflow is a Domain Specific Language (DSL) designed to ease
 the writing of computational pipelines. It is an extension of the
@@ -145,7 +143,7 @@ at the next channel in a different order (asynchrony) due to
 process execution time, or manipulation of channel values by
 channel operators.
 
-A process is a task that executes a user script. The
+A process is a task that executes a user script. The user
 script can be written in any computer language, although the default
 is bash. Each task defined by a process is executed independently,
 and in isolation, and so input must be communicated using channels.
@@ -247,7 +245,7 @@ out_ch.view()
 
 A Nextflow workflow is executed using the `nextflow run <script.nf>`
 command. Each task is executed locally (on your computer) by default,
-and expects all the commands in your process tasks to be
+and expects all the commands in your process scripts to be
 available on the command line. While local execution is suitable for
 small scale data processing, Nextflow integrates support for several
 third-party softwares enabling large scale data processing through
@@ -283,7 +281,8 @@ download and execute a workflow from it.
 > > ~~~
 > > $ nextflow run myscript.nf
 > > ~~~
-> {: .language-bash}
+> > {: .language-bash}
+> {: .solution}
 {: .challenge}
 
 {% include links.md %}
