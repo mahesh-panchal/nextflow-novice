@@ -346,8 +346,8 @@ section.
 
 > ## References
 >
-> - Nextflow Documentation: [https://www.nextflow.io/docs/latest/index.html]
-> - Groovy Syntax: [https://groovy-lang.org/semantics.html]
+> - Nextflow Documentation: [https://www.nextflow.io/docs/latest/index.html](https://www.nextflow.io/docs/latest/index.html)
+> - Groovy Syntax: [https://groovy-lang.org/semantics.html](https://groovy-lang.org/semantics.html)
 {: .callout}
 
 {% include links.md %}
