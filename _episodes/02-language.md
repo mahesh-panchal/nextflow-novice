@@ -292,7 +292,8 @@ section.
 > > {: .language-bash}
 > {: .solution}
 >
-> - Modify and run `myscript.nf` to display the output of `Display_Words`.
+> - Modify and run `myscript.nf` to display the output of the
+> `Display_Words` process.
 >
 > > ## Solution
 > >
@@ -345,8 +346,8 @@ section.
 
 > ## References
 >
-> - Nextflow Documentation: https://www.nextflow.io/docs/latest/index.html
-> - Groovy Syntax: https://groovy-lang.org/semantics.html
+> - Nextflow Documentation: [https://www.nextflow.io/docs/latest/index.html]
+> - Groovy Syntax: [https://groovy-lang.org/semantics.html]
 {: .callout}
 
 {% include links.md %}
