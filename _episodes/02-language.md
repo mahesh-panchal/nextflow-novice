@@ -253,7 +253,7 @@ various package management tools, job schedulers, and distributed
 compute infrastructure tools (See supplementary materials).
 
 ~~~
-$ nextflow run test.nf
+$ nextflow run example.nf
 N E X T F L O W  ~  version 20.01.0
 Launching `test.nf` [marvelous_ride] - revision: 614fc2b804
 executor >  local (4)
