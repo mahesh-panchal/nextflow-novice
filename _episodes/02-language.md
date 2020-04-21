@@ -20,7 +20,8 @@ Nextflow is a Domain Specific Language (DSL) designed to ease
 the writing of computational pipelines. It is an extension of the
 computer language Groovy, which is a superset of the computer
 language Java. As such, Nextflow can execute any piece of Groovy
-code or use any library for the JVM platform.
+code or use any library for the JVM platform. Full documentation
+can be found [here](https://www.nextflow.io/docs/latest/index.html)
 
 This section describes how to write and run a nextflow workflow.
 
@@ -131,7 +132,8 @@ description of Groovy semantics can be found in the [Groovy Documentation](https
 ## Writing a workflow
 
 To ease the writing of computational pipelines Nextflow introduces two
-high-level data structures; channels, and processes.
+high-level data structures; channels, and processes (See
+[Basic concepts](https://www.nextflow.io/docs/latest/basic.html)).
 
 A channel is a data-flow object that passes data asynchronously from
 one process to another. Channels provide methods for reading in data
@@ -289,6 +291,62 @@ section.
 > > ~~~
 > > {: .language-bash}
 > {: .solution}
+>
+> - Modify and run `myscript.nf` to display the output of `Display_Words`.
+>
+> > ## Solution
+> >
+> > ~~~
+> > #! /usr/bin/env nextflow
+> >
+> > word_ch = Channel.from("This","is","my","nextflow","script")
+> > word_ch.view()
+> >
+> > process Display_Words {
+> >
+> >     input:
+> >     val word from word_ch
+> >
+> >     output:
+> >     stdout into out_ch
+> >
+> >     script:
+> >     """
+> >     echo $word
+> >     """
+> >
+> > }
+> >
+> > out_ch.view()
+> > ~~~
+> > {: .language-groovy}  
+> >
+> > ~~~
+> > $ nextflow run myscript.nf
+> > ~~~
+> > {: .language-bash}
+> {: .solution}
+>
+> - Run the hello script from https://github.com/nextflow-io/hello
+>
+> > ## Solution
+> >
+> > ~~~
+> > $ nextflow run nextflow-io/hello
+> > ~~~
+> > {: .language-bash}
+> > or
+> > ~~~
+> > $ nextflow run https://github.com/nextflow-io/hello
+> > ~~~
+> > {: .language-bash}
+> {: .solution}
 {: .challenge}
+
+> ## References
+>
+> - Nextflow Documentation: https://www.nextflow.io/docs/latest/index.html
+> - Groovy Syntax: https://groovy-lang.org/semantics.html
+{: .callout}
 
 {% include links.md %}
