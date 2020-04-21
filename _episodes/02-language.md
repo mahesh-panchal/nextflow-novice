@@ -269,8 +269,14 @@ executor >  local (4)
 ~~~
 {: .language-bash}
 
-If given a path to a version control repository, Nextflow can
-download and execute a workflow from it.
+Nextflow is also able to run workflows from online version
+control repositories. If a script is not locally available,
+Nextflow will attempt to connect to a GitHub repository. The
+repository and other settings can be configured as described in the
+[Pipeline Sharing](https://www.nextflow.io/docs/latest/sharing.html#sharing-page) documentation. Configuration is
+discussed in more detail in the
+[Configuration]({{ page.root }}{% link _episodes/05-configuration.md %})
+section.
 
 > ## Run your own workflows
 >
