@@ -39,7 +39,10 @@ computer infrastructure.
 Typically, images are run as containers in which your commands
 can be executed.
 ~~~
-$ docker run --rm --name fastqc quay.io/biocontainers/fastqc:0.11.9--0 fastqc --version
+# Start a container based on the image `docker run <image>`
+# Run a command `fastqc --version`
+# Remove the container on completion `--rm`
+$ docker run --rm quay.io/biocontainers/fastqc:0.11.9--0 fastqc --version
 FastQC v0.11.9
 ~~~
 {: .language-bash}
@@ -47,7 +50,8 @@ FastQC v0.11.9
 Container images are built according to recipes prescribed in a
 `Dockerfile`. A base image is used a starting point, which could
 be an operating system image, or an pre-defined image with other tools
-preinstalled. Additional instructions then add commands to run,
+preinstalled (e.g. miniconda as seen below). Additional instructions
+then add commands to run,
 set environment variables, entry points, and other metadata.
 
 An example `Dockerfile`:
