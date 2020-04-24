@@ -107,9 +107,11 @@ be stored in an online repository to enable access for others.
 
 > ## Docker Repositories
 >
+> Here are some useful Docker repositories:
 > - Docker Hub: [https://hub.docker.com/](https://hub.docker.com/)
 > - Red Hat Quay: [https://quay.io/](https://quay.io/)
 > - Biocontainers (Bioconda images): [https://biocontainers.pro/#/](https://biocontainers.pro/#/)
+> Github also supports Docker images using Github packages.
 {: .callout}
 
 An additional `docker` scope is provided by Nextflow
