@@ -48,7 +48,7 @@ FastQC v0.11.9
 {: .language-bash}
 
 Container images are built according to recipes prescribed in a
-`Dockerfile`. A base image is used a starting point, which could
+`Dockerfile`. A base image is used as starting point, which could
 be an operating system image, or an pre-defined image with other tools
 preinstalled (e.g. miniconda as seen below). Additional instructions
 then add commands to run,
@@ -56,22 +56,32 @@ set environment variables, entry points, and other metadata.
 
 An example `Dockerfile`:
 ~~~
+# Select the miniconda image as the base
+# https://hub.docker.com/r/continuumio/miniconda3/dockerfile
 FROM continuumio/miniconda3:4.8.2
 
+# Select the shell to use.
 SHELL ["/bin/bash", "-c"]
 
+# Add metadata to the container using labels.
 LABEL description="Spade (Search for Patterned DNA Elements) container" \
       author="Mahesh Binzer-Panchal" \
       version="1.0.0"
 
+# APT (Advanced Packaging Tool) is package manager for certain linux distributions
+# It can be used to update and install software dependencies
 RUN apt-get update --fix-missing && \
     apt-get install -y procps ghostscript
 
+# Conda is another package manager that simplifies package installation
+# This is a useful option for installing bioinformatic packages
 RUN conda update -n base conda && \
     conda install -c conda-forge -c bioconda \
 	python=3.6 mafft=7.455 blast=2.9.0 openssl=1.1.1e && \
     conda clean --all -f -y
 
+# Some tools are not available via package managers.
+# These must then be manually installed.
 WORKDIR /opt
 RUN git clone --depth 1 https://github.com/yachielab/SPADE && \
     cd SPADE && chmod u+x *.py && \
@@ -80,8 +90,10 @@ RUN git clone --depth 1 https://github.com/yachielab/SPADE && \
     pip install weblogo==3.6.0 && \
     pip install biopython
 
+# Environment variables can be set to provide settings for new tools.
 ENV PATH="/opt/SPADE:${PATH}"
 
+# A default command can be provided when a container is started.
 CMD [ "SPADE.py" ]
 ~~~
 {: .source}
@@ -116,7 +128,8 @@ process {
 > ## References
 >
 > - Docker Documentation: [https://docs.docker.com/](https://docs.docker.com/)
+> - Docker Best Practices: [https://docs.docker.com/develop/dev-best-practices/](https://docs.docker.com/develop/dev-best-practices/)
+> - Dockerfile reference: [https://docs.docker.com/engine/reference/builder/](https://docs.docker.com/engine/reference/builder/)
 {: .callout}
-
 
 {% include links.md %}
