@@ -105,6 +105,13 @@ when provided with a path to the image and version (tag)
 `container` directive in the `process` scope. Images should preferably
 be stored in an online repository to enable access for others.
 
+> ## Docker Repositories
+>
+> - Docker Hub: [https://hub.docker.com/](https://hub.docker.com/)
+> - Red Hat Quay: [https://quay.io/](https://quay.io/)
+> - Biocontainers (Bioconda images): [https://biocontainers.pro/#/](https://biocontainers.pro/#/)
+{: .callout}
+
 An additional `docker` scope is provided by Nextflow
 which allows you to supply extra parameters to Docker. In order
 to use a container image with Docker, it must be enabled.   
@@ -127,6 +134,8 @@ process {
 
 > ## References
 >
+> - Nextflow Docker integration: [https://www.nextflow.io/docs/latest/docker.html](https://www.nextflow.io/docs/latest/docker.html)
+> - Nextflow Docker Configuration: [https://www.nextflow.io/docs/latest/config.html#scope-docker](https://www.nextflow.io/docs/latest/config.html#scope-docker)
 > - Docker Documentation: [https://docs.docker.com/](https://docs.docker.com/)
 > - Docker Best Practices: [https://docs.docker.com/develop/dev-best-practices/](https://docs.docker.com/develop/dev-best-practices/)
 > - Dockerfile reference: [https://docs.docker.com/engine/reference/builder/](https://docs.docker.com/engine/reference/builder/)
