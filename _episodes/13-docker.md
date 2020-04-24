@@ -49,7 +49,7 @@ FastQC v0.11.9
 
 Container images are built according to recipes prescribed in a
 `Dockerfile`. A base image is used as starting point, which could
-be an operating system image, or an pre-defined image with other tools
+be an operating system image, or a pre-defined image with other tools
 preinstalled (e.g. miniconda as seen below). Additional instructions
 then add commands to run,
 set environment variables, entry points, and other metadata.
@@ -93,7 +93,7 @@ RUN git clone --depth 1 https://github.com/yachielab/SPADE && \
 # Environment variables can be set to provide settings for new tools.
 ENV PATH="/opt/SPADE:${PATH}"
 
-# A default command can be provided when a container is started.
+# A default command can be provided when a container is started (entry point).
 CMD [ "SPADE.py" ]
 ~~~
 {: .source}
