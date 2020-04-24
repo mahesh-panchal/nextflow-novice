@@ -99,9 +99,9 @@ CMD [ "SPADE.py" ]
 {: .source}
 
 When a container image is built, it is stored in a repository, either
-locally or online. Nextflow is able to retrieve container images for use
-using the `docker pull` instruction at the path
-(`'docker-repository/image-name:tag'`) provided by the
+locally or online. Nextflow is able to retrieve these container images
+when provided with a path to the image and version (tag)
+(`'docker-repository/image-name:tag'`) given by the
 `container` directive in the `process` scope. Images should preferably
 be stored in an online repository to enable access for others.
 
