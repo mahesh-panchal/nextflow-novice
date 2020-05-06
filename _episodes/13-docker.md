@@ -88,7 +88,7 @@ RUN git clone --depth 1 https://github.com/yachielab/SPADE && \
     pip install matplotlib==2.2.3 && \
     pip install seaborn==0.8.1 && \
     pip install weblogo==3.6.0 && \
-    pip install biopython
+    pip install biopython==1.76
 
 # Environment variables can be set to provide settings for new tools.
 ENV PATH="/opt/SPADE:${PATH}"
@@ -105,9 +105,9 @@ when provided with a path to the image and version (tag)
 `container` directive in the `process` scope. Images should preferably
 be stored in an online repository to enable access for others.
 
-> ## Docker Repositories
+> ## Docker Registries
 >
-> Here are some useful Docker repositories:
+> Here are some useful Docker registries:
 > - Docker Hub: [https://hub.docker.com/](https://hub.docker.com/)
 > - Red Hat Quay: [https://quay.io/](https://quay.io/)
 > - Biocontainers (Bioconda images): [https://biocontainers.pro/#/](https://biocontainers.pro/#/)
