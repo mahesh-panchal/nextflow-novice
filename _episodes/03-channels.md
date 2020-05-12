@@ -101,8 +101,128 @@ There are several channel factories available:
 - `Channel.empty`:
     An empty channel which emits nothing.
 
-Other Channel factories exist
+Information on these and other channel factories can be found in the
+[Nextflow Channel factory documentation](https://www.nextflow.io/docs/latest/channel.html#channel-factory)
 
+## Channel operators
 
+Channels pass data from one process to another using the `into` and
+`from` keywords, which put data in, and take data out of the channels.
+The `into` keyword creates a queue type channel which is named by
+the creating process and is available from the global scope to another
+process.
+
+~~~
+process make_file {
+
+    output:
+    file "myfile.txt" into file_ch
+
+    script:
+    """
+    echo "Hello" > myfile.txt
+    """
+}
+
+process add_world {
+
+    input:
+    file 'myfile.txt' from file_ch
+
+    script:
+    """
+    echo "World" >> myfile.txt
+    """
+ }
+~~~
+{: .language-groovy}
+
+Channel operators allow you to manipulate data within channels.
+Some common examples are:
+
+- `collect` (value type channel): Gather all data in the channel
+    as a single output. A common use case, is when one process
+    is used to summarise the output from the previous processes.
+    ~~~
+    process collect_logs {
+
+        input:
+        file logfiles from logs_ch.collect()
+
+        script:
+        """
+        process_log_files.py
+        """
+     }
+    ~~~
+    {: .language-groovy}
+
+- `mix` (queue type channel): Combine data from other channels into
+    this one. A common use case is when one wants to process
+    data from different stages (e.g., pre- and post-filtering).
+    ~~~
+    process bam_stats {
+
+        input:
+        file bam_file from raw_bam_ch.mix(filtered_bam_ch)
+
+        script:
+        """
+        samtools flagstat $bam_file > ${bam_file.baseName}.stats
+        """
+     }
+    ~~~
+    {: .language-groovy}
+- `join` (queue type channel): Join together data based
+    on a key. A common use case is to process related files
+    that were previously processed separately. Reading
+    input from two queue type channels simultaneously does
+    not guarantee correcting pairing of data due to their
+    asynchronicity, and therefore must be combined using a
+    common property before processing.
+    ~~~
+    process annotate_blastp {
+
+        input:
+        tuple val(sample), file(fasta_file) from blastp_fasta_files
+
+        output:
+        tuple val(sample), file("*.tsv") into blastp_annotation_files
+
+        script:
+        """
+        blastp ... > ${sample}_blastp-annotation.tsv
+        """
+    }
+
+    process annotate_interproscan {
+
+        input:
+        tuple val(sample), file(fasta_file) from interproscan_fasta_files
+
+        output:
+        tuple val(sample), file("*.tsv") into interproscan_annotation_files
+
+        script:
+        """
+        interproscan ... > ${sample}_interproscan-annotation.tsv
+        """
+    }
+
+    process merge_annotations {
+
+        input:
+        tuple val(sample), file(blast_annotation), file(interproscan_annotation) from blastp_annotation_files.join(interproscan_annotation_files)
+
+        output:
+        file("${sample}_merged-annotations.gff")
+
+        script:
+        """
+        merge_annotations.py $blast_annotation $interproscan_annotation > ${sample}_merged-annotations.gff
+        """
+     }
+    ~~~
+    {: .language-groovy}
 
 {% include links.md %}
