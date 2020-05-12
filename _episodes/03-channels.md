@@ -34,7 +34,7 @@ is to use Channel factories.
 
 There are several channel factories available:
 
-- `Channel.of`
+- `Channel.of`:
     A queue type channel which emits any values passed as parameters to it.
     ~~~
     Channel.of(1, 2, 3, 4, 'X', 'Y')
@@ -49,27 +49,28 @@ There are several channel factories available:
     X
     Y
     ~~~
-    {: .language-bash}
-- `Channel.value`
+    {: .output}
+- `Channel.value`:
     A value type channel which emits a single value.
     ~~~
     val_ch = Channel.value('Reuse_me')
     ~~~
     {: .language-groovy}
-- `Channel.fromList`
+- `Channel.fromList`:
     A queue type channel which emits all elements of the `List` passed.
     ~~~
     Channel.fromList(['a','b','c','d'])
         .view()
     ~~~
+    {: .language-groovy}
     ~~~
     a
     b
     c
     d
     ~~~
-    {: .language-bash}
-- `Channel.fromPath`
+    {: .output}
+- `Channel.fromPath`:
     A queue type channel which emits each file that matches the
     path provided. Shell wildcard characters can be used to provide
     a glob pattern to match.
@@ -77,7 +78,7 @@ There are several channel factories available:
     file_ch = Channel.fromPath('path/to/my/*.files')
     ~~~
     {: .language-groovy}
-- `Channel.fromFilePairs`
+- `Channel.fromFilePairs`:
     A queue type channel which emits a group of files that match
     the glob pattern provided, along with the common prefix of
     the file group.
@@ -91,13 +92,13 @@ There are several channel factories available:
     [SRR2357,[path/to/my/SRR2357_1.fastq.gz,path/to/my/SRR2357_2.fastq.gz]]
     [SRR2358,[path/to/my/SRR2358_1.fastq.gz,path/to/my/SRR2358_2.fastq.gz]]
     ~~~
-    {: .language-bash}    
-- `Channel.watchPath`
+    {: .output}    
+- `Channel.watchPath`:
     A queue type channel which emits any filenames matching the glob
     pattern provided. By default, only files created while watching
     the path are emitted. Modification or deletion events can also
     be used to trigger emissions.
-- `Channel.empty`
+- `Channel.empty`:
     An empty channel which emits nothing.
 
 Other Channel factories exist
