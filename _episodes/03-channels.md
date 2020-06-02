@@ -14,6 +14,8 @@ keypoints:
 - "Channels can be manipulated using channel operators."
 ---
 
+## What is a Channel?
+
 A Channel is a data structure designed to efficiently pass
 data from one process to another. The primary property of
 channels is they are asynchronous. As soon as a process
@@ -30,7 +32,7 @@ can be reused and so can be used as input to multiple processes.
 ## Reading data into a workflow
 
 The primary method of reading data into a Nextflow workflow
-is to use Channel factories.
+is to use Channel factories; methods that produce channels.
 
 There are several channel factories available:
 
@@ -113,25 +115,25 @@ the creating process and is available from the global scope to another
 process.
 
 ~~~
-process make_file {
+process WriteHello {
 
     output:
     file "myfile.txt" into file_ch
 
     script:
     """
-    echo "Hello" > myfile.txt
+    <commands>
     """
 }
 
-process add_world {
+process AddWorld {
 
     input:
     file 'myfile.txt' from file_ch
 
     script:
     """
-    echo "World" >> myfile.txt
+    <commands>
     """
  }
 ~~~
@@ -140,89 +142,147 @@ process add_world {
 Channel operators allow you to manipulate data within channels.
 Some common examples are:
 
+- `view` (queue type channel): Prints channel data values to
+    the console standard output. This is mostly useful for
+    debugging your own workflows, in particular when you see
+    an unclear error message related to file input.
+    ~~~
+    process WrapText {
+
+        input:
+        file text_file from text_file_ch.view()
+
+        script:
+        """
+        <commands>
+        """
+
+     }
+    ~~~
+    {: .language-groovy}
+- `into` (value type channel): Emits the data from one channel into
+    one or more other named channels. This is commonly used to
+    provide the same input to multiple processes.
+    ~~~
+    Channel.fromFilePairs('/path/to/reads_{1,2}.fastq.gz')
+        .into { fastqc_read_ch; fastp_read_ch }
+
+    process FastP {
+
+        input:
+        tuple val(sample), file(reads) from fastp_read_ch
+
+        output:
+        tuple val(sample), file("${sample}_trimmed_{1,2}.fastq.gz") into (bwa_ch, screen_ch)
+
+        script:
+        """
+        <commands>
+        """
+
+    }
+
+    process FastQC {
+
+        input:
+        tuple val(sample), file(reads) from fastqc_read_ch
+
+        script:
+        """
+        <commands>
+        """
+
+    }
+    ~~~
+    {: .language-groovy}    
 - `collect` (value type channel): Gather all data in the channel
     as a single output. A common use case, is when one process
     is used to summarise the output from the previous processes.
     ~~~
-    process collect_logs {
+    process CollectLogs {
 
         input:
         file logfiles from logs_ch.collect()
 
         script:
         """
-        process_log_files.py
+        <commands>
         """
-     }
+
+    }
     ~~~
     {: .language-groovy}
-
 - `mix` (queue type channel): Combine data from other channels into
     this one. A common use case is when one wants to process
-    data from different stages (e.g., pre- and post-filtering).
+    data from different stages (e.g., pre- and post-filtering)
+    with the same analysis process.
     ~~~
-    process bam_stats {
+    process BAMStats {
 
         input:
         file bam_file from raw_bam_ch.mix(filtered_bam_ch)
 
         script:
         """
-        samtools flagstat $bam_file > ${bam_file.baseName}.stats
+        <commands>
         """
-     }
+
+    }
     ~~~
     {: .language-groovy}
 - `join` (queue type channel): Join together data based
-    on a key. A common use case is to process related files
+    on a common attribute. A common use case is to process related files
     that were previously processed separately. Reading
     input from two queue type channels simultaneously does
     not guarantee correcting pairing of data due to their
     asynchronicity, and therefore must be combined using a
     common property before processing.
     ~~~
-    process annotate_blastp {
+    process AnnotateBlastp {
 
         input:
         tuple val(sample), file(fasta_file) from blastp_fasta_files
 
         output:
-        tuple val(sample), file("*.tsv") into blastp_annotation_files
+        tuple val(sample), file("${sample}_blastp-annotation.tsv") into blastp_annotation_files
 
         script:
         """
-        blastp ... > ${sample}_blastp-annotation.tsv
+        <commands>
         """
+
     }
 
-    process annotate_interproscan {
+    process AnnotateInterproscan {
 
         input:
         tuple val(sample), file(fasta_file) from interproscan_fasta_files
 
         output:
-        tuple val(sample), file("*.tsv") into interproscan_annotation_files
+        tuple val(sample), file("${sample}_interproscan-annotation.tsv") into interproscan_annotation_files
 
         script:
         """
-        interproscan ... > ${sample}_interproscan-annotation.tsv
+        <commands>
         """
+
     }
 
-    process merge_annotations {
+    process MergeAnnotations {
 
         input:
         tuple val(sample), file(blast_annotation), file(interproscan_annotation) from blastp_annotation_files.join(interproscan_annotation_files)
 
-        output:
-        file("${sample}_merged-annotations.gff")
-
         script:
         """
-        merge_annotations.py $blast_annotation $interproscan_annotation > ${sample}_merged-annotations.gff
+        <commands>
         """
-     }
+
+    }
     ~~~
     {: .language-groovy}
+
+Many more channel operators are described in the [Nextflow Channel
+Operator Documentation](https://www.nextflow.io/docs/latest/operator.html).
 
 {% include links.md %}
