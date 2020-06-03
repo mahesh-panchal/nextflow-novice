@@ -1,7 +1,7 @@
 ---
 title: "Channels"
-teaching: 0
-exercises: 0
+teaching: 30
+exercises: 20
 questions:
 - "How do I read data into the workflow?"
 - "How do I pass data around the workflow?"
