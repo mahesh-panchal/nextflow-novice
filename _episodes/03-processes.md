@@ -50,7 +50,7 @@ process < name > {
 ~~~
 {: .source}
 
-The user script is the only required part of the process that needs to be defined. 
+The user script is the only required part of the process that needs to be defined.
 
 ## Isolated run folder
 
@@ -102,5 +102,18 @@ work/b6/c9801458f3e4924a57eac3e9154105:
 ~~~
 {: .output}
 
+The hidden file `.command.sh` contains the interpolated script to
+execute.
+
+~~~
+cat work/b6/c9801458f3e4924a57eac3e9154105/.command.sh
+#!/bin/bash -ue
+echo "string-b"
+~~~
+{: .language-bash}
+
+The hidden file `.command.run` contains code that provides the run-time
+environment in which the script is run. Running this file, can be used to
+help debug processes during the workflow development stage.
 
 {% include links.md %}
