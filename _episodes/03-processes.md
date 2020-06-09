@@ -116,4 +116,25 @@ The hidden file `.command.run` contains code that provides the run-time
 environment in which the script is run. Running this file, can be used to
 help debug processes during the workflow development stage.
 
+## Process input
+
+Since tasks are isolated from each other, input is passed using
+channels.
+
+~~~
+input:
+  <input qualifier> <input name> [from <source channel>] [attributes]
+~~~
+{: .source}
+
+The input qualifier declares the type of data received.
+
+- val: A named value of any type to be used as input.
+- env: A named environment variable to be used as input.
+- file: A file, which is soft-linked into the staging folder so it can be accessed properly in the execution context.
+- path: A file, which is soft-linked into the staging folder so it can be accessed properly in the execution context (use this).
+- stdin: Takes input from stdin
+- tuple: Declares input as a group of inputs using the above qualifiers.
+- each: Executes a task for each input in the collection.
+
 {% include links.md %}
