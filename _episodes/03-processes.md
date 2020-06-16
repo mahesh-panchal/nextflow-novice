@@ -133,12 +133,60 @@ The input qualifier declares the type of data received.
 - env: A named environment variable to be used as input.
 - file: A file, which is soft-linked into the staging folder so it can be accessed properly in the execution context.
 - path: A file, which is soft-linked into the staging folder so it can be accessed properly in the execution context (use this).
-- stdin: Takes input from stdin
+- stdin: Takes input from stdin.
 - tuple: Declares input as a group of inputs using the above qualifiers.
 - each: Executes a task for each input in the collection.
 
 If the `<input name>` matches a name of a channel, it will take input
-directly from that.
+directly from that. In general `<input name>` is treated as variable
+accessible in the process scope. `<input name>` can also be a
+string describing a file glob (pathname pattern expansion)
+containing the characters `?` or `*`, which
+can be useful to control how an input file is named. This is
+the same as using the `stageAs` attribute, e.g. `path x, stageAs: 'data.txt' from input_ch`.
 
+|------------------------+--------------+--------------------------------------------------|  
+| Input file cardinality | Pattern      | Staged as                                        |
+|------------------------|:------------:|-------------------------------------------------:|
+| 1 or many              | `*`          | Original filename                                |
+|------------------------+--------------+--------------------------------------------------|  
+| 1                      | `file?.ext`  | `file1.ext`                                      |
+| many                   | `file?.ext`  | `file1.ext`, `file2.ext`, `file3.ext`            |
+|------------------------+--------------+--------------------------------------------------|  
+| 1                      | `file??.ext` | `file01.ext`                                     |
+| many                   | `file??.ext` | `file01.ext`, `file02.ext`, `file03.ext`         |
+|------------------------+--------------+--------------------------------------------------|  
+| 1                      | `file*.ext`  | `file.ext`                                       |
+| many                   | `file*.ext`  | `file1.ext`,`file2.ext`,`file3.ext`              |
+|------------------------+--------------+--------------------------------------------------|  
+| 1 or many              | `dir/*`      | Original filename in a directory `dir`           |
+| many                   | `dir??/*`    | Each file staged in its own dir `dir01`, `dir02` |            |
+|------------------------+--------------+--------------------------------------------------|  
+
+## Process output
+
+Output should generally be coded to write to the current folder
+where it remains isolated. Using the `output` declaration, one can
+specify which files should be passed on to further processes,
+and/or published as results using a directive.
+
+~~~
+output:
+  <output qualifier> <output name> [into <target channel>[,<target channel2,...]] [attributes]
+~~~
+{: .source}
+
+The output qualifier declares the type of data received.
+
+- val: A named value of any type to be taken as output.
+- env: A named environment variable to be taken as output.
+- file: A filename or glob (pathname pattern expansion) to
+be taken as output.
+- path: A filename or glob (pathname pattern expansion) to
+be taken as output (use this).
+- stdout: Reads output from stdout.
+- tuple: Declares output as a group of outputs using the above qualifiers.
+
+The output name
 
 {% include links.md %}
