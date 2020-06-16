@@ -285,4 +285,72 @@ Some common examples are:
 Many more channel operators are described in the [Nextflow Channel
 Operator Documentation](https://www.nextflow.io/docs/latest/operator.html).
 
+## Multiple input channels
+
+It is important to understand how multiple input channels work.
+When two or more channels are declared as process inputs, the process
+waits until it receives an input value from all the channels
+declared as input.
+
+### Two or more queue type channels.
+
+~~~
+process foo {
+
+    echo true
+
+    input:
+    val x from Channel.of(1,2)
+    val y from Channel.of('a','b','c')
+
+    script:
+    """
+    echo $x and $y
+    """
+}
+~~~
+
+In this case the process `foo` will only run two times since there
+are only two inputs in the first channel. Channel values are
+consumed, and so there is nothing left to pair with `'c'`, which
+is discarded.
+
+In the example above, it should be noted that while the process will
+execute on the pairings `1 and a`, and `2 and b`, that for more complex
+workflows, the queues are asynchronous meaning there's no guarantee
+of having the pairing `1 and a`, and `2 and b`. The emission of
+`'c'` may happen first resulting in a `1 and c` pairing. If certain
+files must be processed together, use one of the queue combining
+operators such as `join` or `groupBy` to generate the correct pairing
+before being passed as input.
+
+### Value channels with queue channels.
+
+~~~
+process foo {
+
+    echo true
+
+    input:
+    val x from Channel.value(1)
+    val y from Channel.of('a','b','c')
+
+    script:
+    """
+    echo $x and $y
+    """
+}
+~~~
+
+In this example, the process `foo` runs three times as values
+from value type channels can be reused. This produces
+the pairings `1 and a`, `1 and b`, and `1 and c`. This is useful
+when using one process to generate an index that is then used
+for processing multiple input files in another process. The
+indexing process outputs are collected into a value channel,
+e.g., using `toList` or `collect`, that can be reused for
+multiple down stream processes.
+
+
+
 {% include links.md %}

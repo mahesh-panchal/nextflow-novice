@@ -137,4 +137,8 @@ The input qualifier declares the type of data received.
 - tuple: Declares input as a group of inputs using the above qualifiers.
 - each: Executes a task for each input in the collection.
 
+If the `<input name>` matches a name of a channel, it will take input
+directly from that.
+
+
 {% include links.md %}
