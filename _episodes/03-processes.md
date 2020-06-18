@@ -58,7 +58,7 @@ Each instance of a process is staged in it's own folder.
 
 Example script:
 ~~~
-x = Channel.from( 'a', 'b', 'c')
+x = Channel.of( 'a', 'b', 'c')
 
 process echo_string {
 
@@ -145,23 +145,23 @@ containing the characters `?` or `*`, which
 can be useful to control how an input file is named. This is
 the same as using the `stageAs` attribute, e.g. `path x, stageAs: 'data.txt' from input_ch`.
 
-|------------------------+--------------+--------------------------------------------------|  
-| Input file cardinality | Pattern      | Staged as                                        |
-|------------------------|:-------------|:-------------------------------------------------|
-| 1 or many              | `*`          | Original filename                                |
-|------------------------+--------------+--------------------------------------------------|  
-| 1                      | `file?.ext`  | `file1.ext`                                      |
-| many                   | `file?.ext`  | `file1.ext`, `file2.ext`, `file3.ext`            |
-|------------------------+--------------+--------------------------------------------------|  
-| 1                      | `file??.ext` | `file01.ext`                                     |
-| many                   | `file??.ext` | `file01.ext`, `file02.ext`, `file03.ext`         |
-|------------------------+--------------+--------------------------------------------------|  
-| 1                      | `file*.ext`  | `file.ext`                                       |
-| many                   | `file*.ext`  | `file1.ext`,`file2.ext`,`file3.ext`              |
-|------------------------+--------------+--------------------------------------------------|  
-| 1 or many              | `dir/*`      | Original filename in a directory `dir`           |
-| many                   | `dir??/*`    | Each file staged in its own dir `dir01`, `dir02` |            |
-|------------------------+--------------+--------------------------------------------------|  
+|--------------+------------------------+--------------------------------------------------|  
+| Pattern      | Input file cardinality | Staged as                                        |
+|:-------------|:-----------------------|:-------------------------------------------------|
+| `*`          | 1 or many              | Original filename                                |
+|--------------+------------------------+--------------------------------------------------|  
+| `file?.ext`  | 1                      | `file1.ext`                                      |
+| `file?.ext`  | many                   | `file1.ext`, `file2.ext`, `file3.ext`            |
+|--------------+------------------------+--------------------------------------------------|  
+| `file??.ext` | 1                      | `file01.ext`                                     |
+| `file??.ext` | many                   | `file01.ext`, `file02.ext`, `file03.ext`         |
+|--------------+------------------------+--------------------------------------------------|  
+| `file*.ext`  | 1                      | `file.ext`                                       |
+| `file*.ext`  | many                   | `file1.ext`,`file2.ext`,`file3.ext`              |
+|--------------+------------------------+--------------------------------------------------|  
+| `dir/*`      | 1 or many              | Original filename in a directory `dir`           |
+| `dir??/*`    | many                   | Each file staged in its own dir `dir01`, `dir02` |            |
+|--------------+------------------------+--------------------------------------------------|  
 
 ## Process output
 
@@ -187,6 +187,92 @@ be taken as output (use this).
 - stdout: Reads output from stdout.
 - tuple: Declares output as a group of outputs using the above qualifiers.
 
-The output name
+The `<output name>` can be a literal value, a file glob pattern, a variable in the process scope,
+or an input variable. When a file glob pattern is used, a List of files is emitted rather than
+a single file object. Input files are by default not included in the list of matched files.
+
+## Conditional processing
+
+A process will only execute when it receives a complete input declaration, i.e. has a data value for
+each declared input. However, we can also choose to pass complete input declarations to processes
+and execute a process only if an input has a certain property, or alternatively execute a process conditional
+on another producing no output. e.g.
+
+An example of checking a property of the input:
+~~~
+Channel.of('Xa','Xb').into {proc_a_ch; proc_b_ch}
+
+process property_a {
+
+        echo true
+
+        input:
+        val str from proc_a_ch
+
+        when:
+        str =~ /a/
+
+        script:
+        """
+        echo Found A!
+        """
+}
+
+process property_b {
+
+        echo true
+
+        input:
+        val str from proc_b_ch
+
+        when:
+        str =~ /b/
+
+        script:
+        """
+        echo Found B!
+        """
+
+}
+~~~
+{: .language-groovy}
+
+An example of execution from no channel input:
+~~~
+Channel.empty().set { step_a_ch }
+
+process step_a {
+
+        echo true
+
+        input:
+        val str from step_a_ch
+
+        output:
+        path 'log.txt' into step_b_ch
+
+        script:
+        """
+        echo Found A! | tee log.txt
+        """
+}
+
+process step_b_if_not_a {
+
+        echo true
+
+        input:
+        val str from step_b_ch.ifEmpty('EMPTY')
+
+        when:
+        str == 'EMPTY'
+
+        script:
+        """
+        echo Did not find A. Executing B!
+        """
+}
+~~~
+{: .language-groovy}
 
 {% include links.md %}
