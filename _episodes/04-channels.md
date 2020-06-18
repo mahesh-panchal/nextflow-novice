@@ -309,6 +309,7 @@ process foo {
     """
 }
 ~~~
+{: .language-groovy}
 
 In this case the process `foo` will only run two times since there
 are only two inputs in the first channel. Channel values are
@@ -341,6 +342,7 @@ process foo {
     """
 }
 ~~~
+{: .language-groovy}
 
 In this example, the process `foo` runs three times as values
 from value type channels can be reused. This produces
@@ -350,7 +352,5 @@ for processing multiple input files in another process. The
 indexing process outputs are collected into a value channel,
 e.g., using `toList` or `collect`, that can be reused for
 multiple down stream processes.
-
-
 
 {% include links.md %}
