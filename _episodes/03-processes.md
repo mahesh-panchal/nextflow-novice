@@ -15,9 +15,6 @@ keypoints:
 ## Processes
 
 Processes are the Nextflow data structure used to run user scripts.
-The default script language is assumed to be Bash script, but
-scripts can be written in any interpreted language, e.g. R, python,
-or perl.
 
 ## The process data structure
 
@@ -274,5 +271,65 @@ process step_b_if_not_a {
 }
 ~~~
 {: .language-groovy}
+
+## The script
+
+Most commonly, the user script is written as a multi-line string. The
+default script language is Bash, but can be any interpreted language, such
+as Rscript, Python, Perl, and so on, as long as an interpreter directive
+is provided at the start of the script (this is different from the process
+directives described next). The only limitation to the commands in
+the script is that they must be available on the target execution system.
+
+Example script using R:
+
+~~~
+process my_R_script {
+
+    input:
+    path 'data.csv' from analysis_ch
+
+    script:
+    """
+    #! /usr/bin/env Rscript
+
+    data <- read.csv("data.csv")
+    """
+}
+~~~
+{: .language-groovy}
+
+One caveat of using Bash as the scripting language is that both Bash
+and Nextflow use the same syntax for variables, and so care must be
+taken if you want to evaluate a variable in Nextflow context or Bash
+context.
+
+~~~
+process foo {
+
+    script:
+    """
+    # Escape the \$ sign to evaluate a variable in Bash context.
+    echo "\$PATH is not the same as $PATH"
+    """
+}
+~~~
+{: .language-groovy}
+
+One can also use the `shell` block definition with single quote
+multi-line strings to do the same thing.
+
+~~~
+process foo {
+
+    shell:
+    '''
+    # Nextflow variables are now referenced with !{var}.
+    echo "$PATH is not the same as !{PATH}"
+    '''
+}
+~~~
+{: .language-groovy}
+
 
 {% include links.md %}
