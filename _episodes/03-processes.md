@@ -374,8 +374,8 @@ can be executed as though they were a normal script available from the
 in the `templates` folder within the same directory as the workflow.
 Template scripts interpret variables starting with `$` in Nextflow
 context, and must be called using the `template` function. Variables
-can either be set from the input declaration or from the script block
-before the template is called.
+can either be assigned to from the input declaration or from the
+script block before the template is called.
 
 ~~~
 process task_A {
