@@ -336,5 +336,77 @@ process foo {
 ~~~
 {: .language-groovy}
 
+The script block can be thought of as a function that returns
+the multi-line string as the result. As such, a script block
+allows the inclusion of Groovy code including control structures
+such as if statements to dictate which code snippet should be
+executed.
+
+~~~
+process my_task {
+
+    input:
+    tuple val(sample), path(reads) from my_read_ch
+
+    script:
+    if ( sample ~ /control/ ) {
+        options = "Options for control"
+        """
+        echo "Do this with control $options"
+        """
+    } else {
+        options = "Options for cases"
+        """
+        echo "Do that with cases -I -X $options"
+        """
+    }
+}
+~~~
+{: .language-groovy}
+
+Scripts do not need to be written as a multi-line string hard-coded
+into a Nextflow workflow, but
+can be written in a separate file that can be used as a stand-alone
+script or as `template` script. Stand-alone scripts should be stored
+in the `bin` folder within the same directory as the workflow, and
+can be executed as though they were a normal script available from the
+`PATH` environment variable. A template script should be stored
+in the `templates` folder within the same directory as the workflow.
+Template scripts interpret variables starting with `$` in Nextflow
+context, and must be called using the `template` function. Variables
+can either be set from the input declaration or from the script block
+before the template is called.
+
+~~~
+process task_A {
+
+    script:
+    """
+    # Run my_script.pl from bin/
+    my_script.pl --arg_a param_a
+    """
+}
+
+process task_B {
+
+    input:
+    val var from var_ch
+
+    script:
+    template vars.sh
+}
+~~~
+{: .language-groovy}
+
+where `vars.sh` looks like:
+
+~~~
+#! /usr/bin/env bash
+
+echo "This is my $var"
+~~~
+{: .language-bash}
+
+## Directives
 
 {% include links.md %}
