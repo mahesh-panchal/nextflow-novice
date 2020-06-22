@@ -10,7 +10,7 @@ Nextflow is a workflow manager rapidly increasing in popularity in the scientifi
 The framework allows scientists to integrate code from any language, separate functional logic
 from the execution engine, encapsulate software dependencies, and simplify analyses into readable,
 self-contained, easy to reproduce projects. It enables high-throughput and data intensive analyses to
-be run locally, or across grid or cloud infrastructures.
+be run locally, or across compute cluster or cloud infrastructures.
 
 <h2>Goal</h2>
 
