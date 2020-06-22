@@ -365,7 +365,7 @@ process my_task {
 {: .language-groovy}
 
 Scripts do not need to be written as a multi-line string hard-coded
-into a Nextflow workflow, but
+into a Nextflow workflow. They
 can be written in a separate file that can be used as a stand-alone
 script or as `template` script. Stand-alone scripts should be stored
 in the `bin` folder within the same directory as the workflow, and
