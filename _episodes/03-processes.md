@@ -3,13 +3,18 @@ title: "Processes"
 teaching: 30
 exercises: 20
 questions:
-- "How do I run an application using Nextflow?"
+- "How do I include an application into a Nextflow workflow?"
 - "How do I pass parameters to the application?"
 - "How do I access application results?"
 objectives:
-- "First learning objective. (FIXME)"
+- "Understand the process data structure"
+- "Detail how a process runs from Nextflow"
+- "Construct and run a complete process definition"
 keypoints:
-- "First key point. Brief Answer to questions. (FIXME)"
+- "A process has five parts: directives, input, output, when, and the script."
+- "Each process task runs from it's own directory."
+- "A process only executes when there is a complete process input declaration."
+- "Selected process output can be saved to a folder using `publishDir`."
 ---
 
 ## Processes
