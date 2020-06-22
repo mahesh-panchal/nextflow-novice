@@ -16,7 +16,7 @@ be run locally, or across compute cluster or cloud infrastructures.
 
 The goal of this lesson is to teach scientists with little programming skill to use and write
 nextflow workflows for scientific analysis. The emphasis of these materials is to provide
-a foundation in the fundamentals of Nextflow, and teach best practices for scientific computing:
+a foundation in the fundamentals of Nextflow, and teach good practices for scientific computing:
 breaking down analyses into modular units, testing, and encapsulation.
 
 Additional material may be provided later for more advanced users.
