@@ -3,9 +3,9 @@ title: "Processes"
 teaching: 30
 exercises: 20
 questions:
-- "How do I include an application into a Nextflow workflow?"
-- "How do I pass parameters to the application?"
-- "How do I access application results?"
+- "How do I include a software tool into a Nextflow workflow?"
+- "How do I pass parameters to the tool?"
+- "How do I access tool results?"
 objectives:
 - "Understand the process data structure"
 - "Detail how a process runs from Nextflow"
@@ -364,8 +364,8 @@ process my_task {
 ~~~
 {: .language-groovy}
 
-Scripts do not need to be written as a multi-line string hard-coded
-into a Nextflow workflow. They
+Scripts do not need to be included as multi-line strings
+into a Nextflow workflow process. They
 can be written in a separate file that can be used as a stand-alone
 script or as `template` script. Stand-alone scripts should be stored
 in the `bin` folder within the same directory as the workflow, and
