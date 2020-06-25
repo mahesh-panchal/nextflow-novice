@@ -409,4 +409,21 @@ echo "This is my $var"
 
 ## Directives
 
+Directives describe the execution behaviour of the process, from telling
+it how much compute resources to reserve, to where it should put the results.
+There are lots of directives described in the [documentation](https://www.nextflow.io/docs/latest/process.html#directives), which allow
+you to customise the running of your workflow to your infrastructure.
+The directives should appear before the input, output, when, and
+script blocks, or alternatively can be provided via configuration files.
+
+Here is a table of some useful directives.
+
+| Directive | Description |
+|-----------+-------------|
+| `executor` | Defines the system on which the processes are executed. This could be local execution, submission to a job scheduler, or to other services. |
+| `cpus` | Assigns the number of cores to reserve. This can be accessed within the script block using `${task.cpus}`. |
+| `memory` | Assigns the amount of memory to reserve. |
+
+
+
 {% include links.md %}
