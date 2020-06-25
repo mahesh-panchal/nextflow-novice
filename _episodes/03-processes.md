@@ -424,6 +424,14 @@ Here is a table of some useful directives.
 | `cpus` | Assigns the number of cores to reserve. This can be accessed within the script block using `${task.cpus}`. |
 | `memory` | Assigns the amount of memory to reserve. |
 
-
+> ## Exercises
+>
+> - Order the blocks
+> - Capture output from one process and stage in another.
+>     - Stage a folder
+>     - Stage some files
+> - When does a process task execute.
+>     - Incomplete header
+{: .challenge}
 
 {% include links.md %}
