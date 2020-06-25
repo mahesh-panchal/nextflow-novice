@@ -427,6 +427,7 @@ Here is a table of some useful directives.
 > ## Exercises
 >
 > - Order the blocks
+> - Stage a parameter file
 > - Capture output from one process and stage in another.
 >     - Stage a folder
 >     - Stage some files
