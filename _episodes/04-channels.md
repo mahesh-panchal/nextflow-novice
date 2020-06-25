@@ -353,4 +353,10 @@ indexing process outputs are collected into a value channel,
 e.g., using `toList` or `collect`, that can be reused for
 multiple down stream processes.
 
+> ## Exercises
+>
+> - join operator
+> - each -> cross
+{: .challenge}
+
 {% include links.md %}
