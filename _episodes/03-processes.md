@@ -134,7 +134,9 @@ The input qualifier declares the type of data received.
 - val: A named value of any type to be used as input.
 - env: A named environment variable to be used as input.
 - file: A file, which is soft-linked into the staging folder so it can be accessed properly in the execution context.
-- path: A file, which is soft-linked into the staging folder so it can be accessed properly in the execution context (use this).
+* path: A backwards-compatible drop-in replacement for `file` with additional
+  functionality introduced in Nextflow 19.10.0, and is thus preferred over
+  `file`.
 - stdin: Takes input from stdin.
 - tuple: Declares input as a group of inputs using the above qualifiers.
 - each: Executes a task for each input in the collection.
