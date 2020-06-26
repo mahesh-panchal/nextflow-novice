@@ -222,20 +222,20 @@ third-party softwares enabling large scale data processing through
 various package management tools, job schedulers, and distributed
 compute infrastructure tools (See supplementary materials).
 
+<!-- I was a bit confused regarding the example below, in that I don't see the
+origins of `example.nf` and what the "Sequence" process does. There's also the
+mispelling (?) of the `test.nf`. Maybe simplify the example so that the focus
+is just on the `run` command?-->
 ~~~
 $ nextflow run example.nf
 N E X T F L O W  ~  version 20.01.0
-Launching `test.nf` [marvelous_ride] - revision: 614fc2b804
+Launching `example.nf` [marvelous_ride] - revision: 614fc2b804
 executor >  local (4)
 [3e/7b764f] process > Sequence [100%] 4 of 4 ✔
-0 1 2
-
-0 1
-
-0 1 2 3 4
-
-0 1 2 3
-
+0
+1
+2
+3
 ~~~
 {: .language-bash}
 
