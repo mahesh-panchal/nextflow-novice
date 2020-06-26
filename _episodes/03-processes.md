@@ -154,8 +154,26 @@ directly from that. In general `<input name>` is treated as variable
 accessible in the process scope. `<input name>` can also be a
 string describing a file glob (pathname pattern expansion)
 containing the characters `?` or `*`, which
-can be useful to control how an input file is named. This is
-the same as using the `stageAs` attribute, e.g. `path x, stageAs: 'data.txt' from input_ch`.
+can be useful to control how an input file is named.
+
+~~~
+process stage {
+
+    input:
+    path 'dir/*' from log_ch.collect()
+    path csv_files, stageAs: 'data??.csv' from csv_ch.collect()
+
+    script:
+    """
+    ls *.csv
+    process_files.py $csv_files
+    ls dir
+    """
+}
+~~~
+{: .language-groovy}
+
+A table of how file glob inputs are interpreted:
 
 |--------------+------------------------+--------------------------------------------------|  
 | Pattern      | Input file cardinality | Staged as                                        |
