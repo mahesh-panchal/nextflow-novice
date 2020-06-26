@@ -185,10 +185,10 @@ The output qualifier declares the type of data received.
 
 - `val`: A named value of any type to be taken as output.
 - `env`: A named environment variable to be taken as output.
-- `file`: A filename or glob (pathname pattern expansion) to
-be taken as output.
-- `path`: A filename or glob (pathname pattern expansion) to
-be taken as output (use this).
+- `file`: A filename or glob (pathname pattern expansion) to be taken as
+  output.
+- `path`: A filename or glob (pathname pattern expansion) to be taken as output
+  (preferred over `file`, see the "input" section above).
 - `stdout`: Reads output from stdout.
 - `tuple`: Declares output as a group of outputs using the above qualifiers.
 
