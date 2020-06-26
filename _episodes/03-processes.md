@@ -403,9 +403,9 @@ process foo {
 
 The script block can be thought of as a function that returns
 the multi-line string as the result. As such, a script block
-allows the inclusion of Groovy code including control structures
-such as if statements to dictate which code snippet should be
-executed.
+allows the inclusion of additional code statements including
+control structures such as if statements to dictate which
+code snippet should be executed.
 
 ~~~
 process my_task {
