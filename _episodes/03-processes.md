@@ -131,13 +131,16 @@ input:
 
 The input qualifier declares the type of data received.
 
-- val: A named value of any type to be used as input.
-- env: A named environment variable to be used as input.
-- file: A file, which is soft-linked into the staging folder so it can be accessed properly in the execution context.
-- path: A file, which is soft-linked into the staging folder so it can be accessed properly in the execution context (use this).
-- stdin: Takes input from stdin.
-- tuple: Declares input as a group of inputs using the above qualifiers.
-- each: Executes a task for each input in the collection.
+- `val`: A named value of any type to be used as input.
+- `env`: A named environment variable to be used as input.
+- `file`: A file, which is soft-linked into the staging folder so it can be
+  accessed properly in the execution context.
+* `path`: A backwards-compatible drop-in replacement for `file` with additional
+  functionality introduced in Nextflow 19.10.0, and is thus preferred over
+  `file`.
+- `stdin`: Takes input from stdin.
+- `tuple`: Declares input as a group of inputs using the above qualifiers.
+- `each`: Executes a task for each input in the collection.
 
 If the `<input name>` matches a name of a channel, it will take input
 directly from that. In general `<input name>` is treated as variable
@@ -180,14 +183,14 @@ output:
 
 The output qualifier declares the type of data received.
 
-- val: A named value of any type to be taken as output.
-- env: A named environment variable to be taken as output.
-- file: A filename or glob (pathname pattern expansion) to
-be taken as output.
-- path: A filename or glob (pathname pattern expansion) to
-be taken as output (use this).
-- stdout: Reads output from stdout.
-- tuple: Declares output as a group of outputs using the above qualifiers.
+- `val`: A named value of any type to be taken as output.
+- `env`: A named environment variable to be taken as output.
+- `file`: A filename or glob (pathname pattern expansion) to be taken as
+  output.
+- `path`: A filename or glob (pathname pattern expansion) to be taken as output
+  (preferred over `file`, see the "input" section above).
+- `stdout`: Reads output from stdout.
+- `tuple`: Declares output as a group of outputs using the above qualifiers.
 
 The `<output name>` can be a literal value, a file glob pattern, a variable in the process scope,
 or an input variable. When a file glob pattern is used, a List of files is emitted rather than
@@ -198,7 +201,7 @@ a single file object. Input files are by default not included in the list of mat
 A process will only execute when it receives a complete input declaration, i.e. has a data value for
 each declared input. However, we can also choose to pass complete input declarations to processes
 and execute a process only if an input has a certain property, or alternatively execute a process conditional
-on another producing no output. e.g.
+on another producing no output.
 
 An example of checking a property of the input:
 ~~~
