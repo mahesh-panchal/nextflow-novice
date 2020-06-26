@@ -113,10 +113,13 @@ execute.
 
 ~~~
 cat work/b6/c9801458f3e4924a57eac3e9154105/.command.sh
+~~~
+{: .language-bash}
+~~~
 #!/bin/bash -ue
 echo "string-b"
 ~~~
-{: .language-bash}
+{: .output}
 
 The hidden file `.command.run` contains code that provides the run-time
 environment in which the script is run. Running this file, can be used to
