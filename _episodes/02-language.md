@@ -171,19 +171,19 @@ Example (`example.nf`):
 ~~~
 #! /usr/bin/env nextflow
 
-number_ch = Channel.from(1,2,3,4)
+number_ch = Channel.of(1,2,3,4)
 
 process Sequence {
 
     input:
-    val max from number_ch
+    val num from number_ch
 
     output:
     stdout into out_ch
 
     script:
     """
-    echo {0..$max}
+    echo $num
     """
 
 }
@@ -192,24 +192,20 @@ out_ch.view()
 ~~~
 {: .language-groovy}
 
-<!-- Given the completeness of the example above, I think dividing the excercise
-up into so many different parts may be overdoing it - it could potentially
-suffice to ask for a complete script straight away. -->
 > ## Write a nextflow script
 >
 > Create your own Nextflow script containing the following:
-> - A directive to use the Nextflow interpreter
-> - A channel containing the words "This", "is", "my", "Nextflow", "script"
-> - A display of the contents of the above channel using the `view` method
-> - A process that displays the contents of the channel using the `echo` shell
-> - command
+> - A directive to use the Nextflow interpreter.
+> - A channel containing the words "This", "is", "my", "Nextflow", "script".
+> - A statement to see the contents of the above channel using the `view` method.
+> - A process that prints each channel value using the shell command `echo`.
 >
 > > ## Solution
 > >
 > > ~~~
 > > #! /usr/bin/env nextflow
 > >
-> > word_ch = Channel.from("This","is","my","nextflow","script")
+> > word_ch = Channel.of("This","is","my","nextflow","script")
 > > word_ch.view()
 > >
 > > process Display_Words {
@@ -239,10 +235,6 @@ third-party softwares enabling large scale data processing through
 various package management tools, job schedulers, and distributed
 compute infrastructure tools (See supplementary materials).
 
-<!-- I was a bit confused regarding the example below, in that I don't see the
-origins of `example.nf` and what the "Sequence" process does. There's also the
-mispelling (?) of the `test.nf`. Maybe simplify the example so that the focus
-is just on the `run` command?-->
 ~~~
 $ nextflow run example.nf
 N E X T F L O W  ~  version 20.01.0
