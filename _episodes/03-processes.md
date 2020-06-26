@@ -418,6 +418,7 @@ script blocks, or alternatively can be provided via configuration files.
 
 Here is a table of some useful directives.
 
+|-----------+-------------|
 | Directive | Description |
 |-----------+-------------|
 | `publishDir` | Defines where files from the output block should be written. Multiple `publishDir` directives can be provided to a process,
@@ -437,6 +438,9 @@ along with the `pattern` parameter to write output to separate paths. |
 | `container` | Defines which container images of software to use. Use `containerOptions` to provide process specific additional configuration. |
 | ----------+-------------|
 | `errorStrategy` | Describes how Nextflow should behave when a process terminates with an error. |
+|-----------+-------------|
+
+
 > ## Exercises
 >
 > - Order the blocks
