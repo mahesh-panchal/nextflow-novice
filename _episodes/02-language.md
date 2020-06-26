@@ -175,49 +175,17 @@ out_ch.view()
 ~~~
 {: .language-groovy}
 
+<!-- Given the completeness of the example above, I think dividing the excercise
+up into so many different parts may be overdoing it - it could potentially
+suffice to ask for a complete script straight away. -->
 > ## Write a nextflow script
 >
-> - Create and save a file `myscript.nf` with the directive
-> to use the nextflow interpreter.
->
-> > ## Solution
-> >
-> > The `myscript.nf` script should now look like this:
-> >
-> > ~~~
-> > #! /usr/bin/env nextflow
-> > ~~~
-> > {: .language-groovy}
-> {: .solution}
->
-> - Add a channel `word_ch` to the script that sends the words, "This","is","my","nextflow","script" into the channel.
->
-> > ## Solution
-> >
-> > ~~~
-> > #! /usr/bin/env nextflow
-> >
-> > word_ch = Channel.from("This","is","my","nextflow","script")
-> > ~~~
-> > {: .language-groovy}
-> {: .solution}
->
-> - Use the `view` method to display the content of the `word_ch` channel.
->
-> > ## Solution
-> >
-> > ~~~
-> > #! /usr/bin/env nextflow
-> >
-> > word_ch = Channel.from("This","is","my","nextflow","script")
-> > word_ch.view()
-> > ~~~
-> > {: .language-groovy}
-> {: .solution}
->
-> - Add a process `Display_Words` the to script. Take input
-> from the `word_ch` channel.
-> Use the shell command `echo` to print the each word.
+> Create your own Nextflow script containing the following:
+> - A directive to use the Nextflow interpreter
+> - A channel containing the words "This", "is", "my", "Nextflow", "script"
+> - A display of the contents of the above channel using the `view` method
+> - A process that displays the contents of the channel using the `echo` shell
+> - command
 >
 > > ## Solution
 > >
