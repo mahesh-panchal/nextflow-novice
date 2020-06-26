@@ -8,13 +8,14 @@ questions:
 - "How do I access tool results?"
 objectives:
 - "Understand the process data structure"
-- "Detail how a process runs from Nextflow"
+- "Detail how and when a process runs from Nextflow"
 - "Construct and run a complete process definition"
 keypoints:
 - "A process has five parts: directives, input, output, when, and the script."
 - "Each process task runs from it's own directory."
 - "A process only executes when there is a complete process input declaration."
 - "Selected process output can be saved to a folder using `publishDir`."
+- "Directives control process execution behaviour."
 ---
 
 ## Processes
