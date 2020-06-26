@@ -53,15 +53,16 @@ with `//`. Multi-line comments are nested between `/*` and `*/` tags.
     {: .language-groovy}
 - Variables are assigned using `=` and can have any value. Variables used
 inside a double quoted string are prefixed with a `$` to denote the
-variable should be interpolated.
+variable should be interpolated. A variable is otherwise just used by it's
+name.
     ~~~
-    myvar = 1                           // Integer
-    myvar = -3.1499392                  // Floating point number
-    myvar = false                       // Boolean
-    myvar = "Hello world"               // String
-    myvar = new java.util.Date()        // Object - Abstract data structure
-    // Variable used inside a string.
-    message = "The file $file cannot be found!"
+    myvar = 1                                     // Integer
+    myvar = -3.1499392                            // Floating point number
+    myvar = false                                 // Boolean
+    myvar = "Hello world"                         // String
+    myvar = new java.util.Date()                  // Object - Abstract data structure
+    message = "The file $file cannot be found!"   // Variable used inside a string.
+    println message                               // Print variable
     ~~~
     {: .language-groovy}
 - Lists (also known as arrays) are defined using the square bracket `[]` notation.
