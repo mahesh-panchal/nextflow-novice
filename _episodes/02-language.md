@@ -129,7 +129,7 @@ is evaluated when it is called, returning the result of the last statement
 in the closure.
     ~~~
     // Find all elements > 1
-    above_one = [1, 2, 3].findAll { it > 1 }
+    above_one = [1, 2, 3].findAll { it -> it > 1 }
 
     // Closure in a string
     message = "The file ${ file.getName() } cannot be found!"
