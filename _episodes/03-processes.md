@@ -412,8 +412,8 @@ echo "This is my $var"
 
 ## Directives
 
-Directives describe the execution behaviour of the process, from telling
-it how much compute resources to reserve, to where it should put the results.
+Directives describe the execution behaviour of the process, from the
+compute resources to reserve, to where it should put the results.
 There are lots of directives described in the [documentation](https://www.nextflow.io/docs/latest/process.html#directives), which allow
 you to customise the running of your workflow to your infrastructure.
 The directives should appear before the input, output, when, and
