@@ -131,15 +131,16 @@ input:
 
 The input qualifier declares the type of data received.
 
-- val: A named value of any type to be used as input.
-- env: A named environment variable to be used as input.
-- file: A file, which is soft-linked into the staging folder so it can be accessed properly in the execution context.
-* path: A backwards-compatible drop-in replacement for `file` with additional
+- `val`: A named value of any type to be used as input.
+- `env`: A named environment variable to be used as input.
+- `file`: A file, which is soft-linked into the staging folder so it can be
+  accessed properly in the execution context.
+* `path`: A backwards-compatible drop-in replacement for `file` with additional
   functionality introduced in Nextflow 19.10.0, and is thus preferred over
   `file`.
-- stdin: Takes input from stdin.
-- tuple: Declares input as a group of inputs using the above qualifiers.
-- each: Executes a task for each input in the collection.
+- `stdin`: Takes input from stdin.
+- `tuple`: Declares input as a group of inputs using the above qualifiers.
+- `each`: Executes a task for each input in the collection.
 
 If the `<input name>` matches a name of a channel, it will take input
 directly from that. In general `<input name>` is treated as variable
@@ -182,14 +183,14 @@ output:
 
 The output qualifier declares the type of data received.
 
-- val: A named value of any type to be taken as output.
-- env: A named environment variable to be taken as output.
-- file: A filename or glob (pathname pattern expansion) to
+- `val`: A named value of any type to be taken as output.
+- `env`: A named environment variable to be taken as output.
+- `file`: A filename or glob (pathname pattern expansion) to
 be taken as output.
-- path: A filename or glob (pathname pattern expansion) to
+- `path`: A filename or glob (pathname pattern expansion) to
 be taken as output (use this).
-- stdout: Reads output from stdout.
-- tuple: Declares output as a group of outputs using the above qualifiers.
+- `stdout`: Reads output from stdout.
+- `tuple`: Declares output as a group of outputs using the above qualifiers.
 
 The `<output name>` can be a literal value, a file glob pattern, a variable in the process scope,
 or an input variable. When a file glob pattern is used, a List of files is emitted rather than
