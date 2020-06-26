@@ -371,8 +371,8 @@ process my_R_script {
 
 One caveat of using Bash as the scripting language is that both Bash
 and Nextflow use the same syntax for variables, and so care must be
-taken if you want to evaluate a variable in Nextflow context or Bash
-context.
+taken if you want to evaluate a variable in Nextflow context (by
+the nextflow interpreter) or in Bash context (by the bash interpreter).
 
 ~~~
 process foo {
