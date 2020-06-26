@@ -217,9 +217,42 @@ The output qualifier declares the type of data received.
 - `stdout`: Reads output from stdout.
 - `tuple`: Declares output as a group of outputs using the above qualifiers.
 
-The `<output name>` can be a literal value, a file glob pattern, a variable in the process scope,
-or an input variable. When a file glob pattern is used, a List of files is emitted rather than
-a single file object. Input files are by default not included in the list of matched files.
+The `<output name>` can be a literal value, a file glob pattern, a
+variable in the process scope, or an input variable. A process task
+will always emit just one value into the output channel. When a file
+glob pattern is used, a List of files is emitted rather than
+a single file object. Input files are by default not included
+in the list of matched files.
+
+~~~
+process outfiles {
+
+    output:
+    path "somefile.txt" into onefile_ch
+    path "lots*.file" into manyfiles_ch
+
+    script:
+    """
+    touch somefile.txt lots{1..4}.file
+    """
+}
+
+onefile_ch.view()
+manyfiles_ch.view()
+~~~
+{: .language-groovy}
+
+~~~
+N E X T F L O W  ~  version 20.01.0
+Launching `view_outputfiles.nf` [stoic_blackwell] - revision: 07b06e56ad
+executor >  local (1)
+[78/ea9da5] process > outfiles [100%] 1 of 1 ✔
+<pwd>/<work_cachedir>/somefile.txt
+[<pwd>/<work_cachedir>/lots1.file, <pwd>/<work_cachedir>/lots2.file, <pwd>/<work_cachedir>/lots3.file, <pwd>/<work_cachedir>/lots4.file]
+~~~
+{: .output}
+where `<pwd>` is the current directory, and `<work_cachedir>` is the
+work directory where the file was created.
 
 ## Conditional processing
 
