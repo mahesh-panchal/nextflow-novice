@@ -251,8 +251,8 @@ executor >  local (1)
 [<pwd>/<work_cachedir>/lots1.file, <pwd>/<work_cachedir>/lots2.file, <pwd>/<work_cachedir>/lots3.file, <pwd>/<work_cachedir>/lots4.file]
 ~~~
 {: .output}
-where `<pwd>` is the current directory, and `<work_cachedir>` is the
-work directory where the file was created.
+where the current directory has been replaced with `<pwd>`, and the
+work directory has been replaced with `<work_cachedir>`.
 
 ## Conditional processing
 
@@ -448,7 +448,7 @@ process task_A {
     script:
     """
     # Run my_script.pl from bin/
-    my_script.pl 
+    my_script.pl
     """
 }
 
