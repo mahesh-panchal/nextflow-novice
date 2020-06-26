@@ -420,10 +420,23 @@ Here is a table of some useful directives.
 
 | Directive | Description |
 |-----------+-------------|
+| `publishDir` | Defines where files from the output block should be written. Multiple `publishDir` directives can be provided to a process,
+along with the `pattern` parameter to write output to separate paths. |
+| `label` | Provides the process with a label that can be used for configuring a group of processes. |
+| ----------+-------------|
 | `executor` | Defines the system on which the processes are executed. This could be local execution, submission to a job scheduler, or to other services. |
 | `cpus` | Assigns the number of cores to reserve. This can be accessed within the script block using `${task.cpus}`. |
+| `time` | Assigns the maximum length of time the task should run for. |
 | `memory` | Assigns the amount of memory to reserve. |
-
+| `queue` | Defines the queue to use for certain grid based executors |
+| `clusterOptions` | Defines additional options necessary for your grid bases executors.
+| `scratch` | Defines whether a process should be run on a temporary folder local to the execution node (Highly recommended when using a grid executor!). Only output files are copied back across to the working dir (Saving valuable disk space, but losing potentially helpful files from unsuccessful tasks). |
+| ----------+-------------|
+| `module` | Defines which software modules to use. |
+| `conda` | Defines which conda software packages to use. |
+| `container` | Defines which container images of software to use. Use `containerOptions` to provide process specific additional configuration. |
+| ----------+-------------|
+| `errorStrategy` | Describes how Nextflow should behave when a process terminates with an error. |
 > ## Exercises
 >
 > - Order the blocks
