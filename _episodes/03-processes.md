@@ -77,6 +77,9 @@ process echo_string {
 ~~~
 {: .language-groovy}
 
+After running the example script, a `work` folder is created where
+process tasks are cached.
+
 ~~~
 $ ls -a -R work/
 ~~~
