@@ -448,7 +448,7 @@ process task_A {
     script:
     """
     # Run my_script.pl from bin/
-    my_script.pl --arg_a param_a
+    my_script.pl 
     """
 }
 
