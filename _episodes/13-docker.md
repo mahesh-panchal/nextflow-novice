@@ -135,6 +135,30 @@ process {
 ~~~
 {: .source}
 
+> ## Default user
+>
+> When running a container using Docker, the default docker user is used
+> to run the process. This is the same user
+> with which the image was built (default: `root`). For life science
+> projects it is rare that tools need to be run with superuser
+> privileges, and often one wants to run tools using the current
+> user. It is helpful to add `runOptions` to the docker configuration
+> scope like so:
+>
+> ~~~
+> docker {
+>     enabled = true
+>     // Uses `id` to get the current user id and group id of the user
+>     runOptions='-u "$( id -u ):$( id -g )"'
+> }
+> ~~~
+> {: .language-groovy}
+>
+> Docker images run using other container platforms use the settings
+> prescribed by the other container platform. For example, Singularity
+> will use the current user as the default user.  
+{: .callout}
+
 > ## References
 >
 > - Nextflow Docker integration: [https://www.nextflow.io/docs/latest/docker.html](https://www.nextflow.io/docs/latest/docker.html)
