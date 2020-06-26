@@ -201,7 +201,7 @@ a single file object. Input files are by default not included in the list of mat
 A process will only execute when it receives a complete input declaration, i.e. has a data value for
 each declared input. However, we can also choose to pass complete input declarations to processes
 and execute a process only if an input has a certain property, or alternatively execute a process conditional
-on another producing no output. e.g.
+on another producing no output.
 
 An example of checking a property of the input:
 ~~~
