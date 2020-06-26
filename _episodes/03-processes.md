@@ -421,8 +421,7 @@ Here is a table of some useful directives.
 |-----------+-------------|
 | Directive | Description |
 |-----------+-------------|
-| `publishDir` | Defines where files from the output block should be written. Multiple `publishDir` directives can be provided to a process,
-along with the `pattern` parameter to write output to separate paths. |
+| `publishDir` | Defines where files from the output block should be written. Multiple `publishDir` directives can be provided to a process, along with the `pattern` parameter to write output to separate paths. |
 | `label` | Provides the process with a label that can be used for configuring a group of processes. |
 | ----------+-------------|
 | `executor` | Defines the system on which the processes are executed. This could be local execution, submission to a job scheduler, or to other services. |
