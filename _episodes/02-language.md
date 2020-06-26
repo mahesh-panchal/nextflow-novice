@@ -51,13 +51,17 @@ with `//`. Multi-line comments are nested between `/*` and `*/` tags.
     */
     ~~~
     {: .language-groovy}
-- Variables are assigned using `=` and can have any value.
+- Variables are assigned using `=` and can have any value. Variables used
+inside a double quoted string are prefixed with a `$` to denote the
+variable should be interpolated.
     ~~~
     myvar = 1                           // Integer
     myvar = -3.1499392                  // Floating point number
     myvar = false                       // Boolean
     myvar = "Hello world"               // String
     myvar = new java.util.Date()        // Object - Abstract data structure
+    // Variable used inside a string.
+    message = "The file $file cannot be found!"
     ~~~
     {: .language-groovy}
 - Lists (also known as arrays) are defined using the square bracket `[]` notation.
@@ -115,6 +119,19 @@ switch/case tests, for loops, and while loops.
         println "Are we there yet?"
     }
     println "We've arrived!"
+    ~~~
+    {: .language-groovy}
+- Closures are open, anonymous, blocks of code that can take arguments,
+return a value and be assigned to a variable. A closure definition
+follows the syntax `{ [closureParameters ->] statements }`. A closure
+is evaluated when it is called, returning the result of the last statement
+in the closure.
+    ~~~
+    // Find all elements > 1
+    above_one = [1, 2, 3].findAll { it > 1 }
+
+    // Closure in a string
+    message = "The file ${ file.getName() } cannot be found!"
     ~~~
     {: .language-groovy}
 
