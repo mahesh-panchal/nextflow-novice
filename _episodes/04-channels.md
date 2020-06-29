@@ -327,7 +327,7 @@ When two or more channels are declared as process inputs, the process
 waits until it receives an input value from all the channels
 declared as input.
 
-### Two or more queue type channels.
+### Two or more queue type channels.
 
 ~~~
 process foo {
