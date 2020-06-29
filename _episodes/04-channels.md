@@ -175,8 +175,9 @@ Some common examples are:
 
 - `view` (queue type channel): Prints channel data values to
     the console standard output. This is mostly useful for
-    debugging your own workflows, in particular when you see
-    an unclear error message related to file input.
+    debugging your own workflows, in particular when you want to
+    clarify an unclear error message related to file input,
+    or why a process does not spawn a task.
     ~~~
     process WrapText {
 
