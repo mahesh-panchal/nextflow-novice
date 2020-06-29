@@ -1,11 +1,13 @@
 ---
-title: "Introduction"
+title: "Workflow Configuration"
 teaching: 0
 exercises: 0
 questions:
-- "Key question (FIXME)"
+- "How do I configure Nextflow for my infrastructure?"
 objectives:
-- "First learning objective. (FIXME)"
+- "Learn how to separate workflow logic from execution."
+- "Learn how to create workflow profiles."
+- "Learn how configuration nesting works."
 keypoints:
 - "First key point. Brief Answer to questions. (FIXME)"
 ---
