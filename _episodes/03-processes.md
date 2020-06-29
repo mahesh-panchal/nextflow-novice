@@ -479,7 +479,8 @@ compute resources to reserve, to where it should put the results.
 There are lots of directives described in the [documentation](https://www.nextflow.io/docs/latest/process.html#directives), which allow
 you to customise the running of your workflow to your infrastructure.
 The directives should appear before the input, output, when, and
-script blocks, or alternatively can be provided via configuration files.
+script blocks, or alternatively can be provided via configuration files
+(recommended for certain directives).
 
 Here is a table of some useful directives.
 
@@ -504,6 +505,26 @@ Here is a table of some useful directives.
 | `errorStrategy` | Describes how Nextflow should behave when a process terminates with an error. |
 |-----------+-------------|
 
+
+Directives can be dynamically defined using a closure. In this example
+the executor queue is determined by value of entries.
+
+~~~
+process foo {
+
+  executor 'sge'
+  queue { entries > 100 ? 'long' : 'short' }
+
+  input:
+  tuple val(entries), path(filename) from data
+
+  script:
+  """
+  < your job here >
+  """
+}
+~~~
+{: .language-groovy}
 
 > ## Exercises
 >
