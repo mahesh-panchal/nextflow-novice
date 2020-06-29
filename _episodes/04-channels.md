@@ -170,12 +170,6 @@ process AddWorld {
 ~~~
 {: .language-groovy}
 
-<!-- Something I thought about in the following section is that there is no
-example output. Having this may take too much space, however, especially
-since the example code is fairly self-explanatory, at least to me. Just
-wanted to mention that I thought about it, if it was something you already
-had thought about yourself.-->
-
 Channel operators allow you to manipulate data within channels.
 Some common examples are:
 
