@@ -8,6 +8,7 @@ questions:
 objectives:
 - "Learn how to read data into the workflow."
 - "Learn how data is passed between processes."
+- "Learn how to use channel operations to wrangle data into the required input form."
 keypoints:
 - "Channels pass data into and out of processes."
 - "There are two types of channel, queue and value channels."
