@@ -12,6 +12,7 @@ objectives:
 keypoints:
 - "Channels pass data into and out of processes."
 - "There are two types of channel, queue and value channels."
+- "Each channel must have it's own input channel."
 - "Channels can be manipulated using channel operators."
 ---
 
@@ -379,14 +380,10 @@ process foo {
 ~~~
 {: .language-groovy}
 
-In this example, the process `foo` runs three times as values
-from value type channels can be reused. This produces
-the pairings `1 and a`, `1 and b`, and `1 and c`. This is useful
-when using one process to generate an index that is then used
-for processing multiple input files in another process. The
-indexing process outputs are collected into a value channel,
-e.g., using `toList` or `collect`, that can be reused for
-multiple down stream processes.
+In this example, the process `foo` runs three times since the input data
+from the value type channel can be reused to make a complete input
+declaration. This produces the pairings `1 and a`, `1 and b`, and
+`1 and c`.
 
 > ## Exercises
 >
