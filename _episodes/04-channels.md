@@ -230,6 +230,9 @@ Some common examples are:
 - `collect` (value type channel): Gather all data in the channel
     as a single output. A common use case, is when one process
     is used to summarise the output from the previous processes.
+    When an input channel remains empty, nothing is emitted by
+    `collect`. Use `toList` if a channel should emit an empty list
+    when a channel is empty.
     ~~~
     process CollectLogs {
 
