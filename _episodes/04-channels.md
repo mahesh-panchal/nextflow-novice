@@ -25,10 +25,40 @@ processing, without waiting for other processes. This allows
 a following process to start sooner.
 
 Nextflow utilises two types of Channel, queue and value channels.
-Queue type channels consume data (first in, first out) as it's passed
-from one process to another. This means a queue type channel can
-only be used for input to one process. A value type channel however
-can be reused and so can be used as input to multiple processes.
+Queue type channels consume data in a first in, first out manner
+to create process input declarations. The data in value type channels
+however can be reused when constructing process input declarations.
+Since a process must perform operations on input channels to make
+an input declaration and spawn a task, each process needs it's own input
+channel. This is achieved using the `into` operator on a channel to create
+two or more channels that can be used by different processes.
+
+~~~
+Channel.of(1,2,3,4).into { sq_ch; db_ch }
+
+process square {
+
+    input:
+    val x from sq_ch
+
+    shell:
+    """
+    echo $x*$x | bc -l
+    """
+}
+
+process double {
+
+    input:
+    val x from sq_ch
+
+    shell:
+    """
+    echo 2*$x | bc -l
+    """
+}
+~~~
+{: .language-groovy}
 
 ## Reading data into a workflow
 
