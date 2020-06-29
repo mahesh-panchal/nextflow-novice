@@ -361,6 +361,7 @@ multiple down stream processes.
 
 > ## Exercises
 >
+> - mix operator
 > - join operator
 > - each -> cross
 {: .challenge}
