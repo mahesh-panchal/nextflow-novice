@@ -324,7 +324,7 @@ Operator Documentation](https://www.nextflow.io/docs/latest/operator.html).
 
 ## Multiple input channels
 
-It is important to understand how multiple input channels work.
+It is important to understand how multiple input channels are processed.
 When two or more channels are declared as process inputs, the process
 waits until it receives an input value from all the channels
 declared as input.
