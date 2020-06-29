@@ -36,7 +36,7 @@ two or more channels that can be used by different processes.
 ~~~
 Channel.of(1,2,3,4).into { sq_ch; db_ch }
 
-process square {
+process square_it {
 
     input:
     val x from sq_ch
@@ -47,7 +47,7 @@ process square {
     """
 }
 
-process double {
+process double_it {
 
     input:
     val x from sq_ch
