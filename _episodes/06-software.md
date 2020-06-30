@@ -1,5 +1,5 @@
 ---
-title: "Supplementary - Nextflow and Package Managers"
+title: "Software Package Managers"
 teaching: 0
 exercises: 0
 questions:
@@ -10,9 +10,10 @@ keypoints:
 - "First key point. Brief Answer to questions. (FIXME)"
 ---
 
-# Package Managers
+## Software package managers
 
-By default, Nextflow expects all the commands or interpreters
+The basic premise of Nextflow is to chain lots of different tools
+together. By default, Nextflow expects all the commands or interpreters
 to be available via the shell `PATH` environment variable.
 However, many tools may have complex dependencies which can
 cause conflicts with other tools in the same environment.
