@@ -117,6 +117,22 @@ process {
 ~~~
 {: .language-groovy}
 
+Some of the process configuration properties can accessed within a process
+from the Task Configuration variable `task`.
+<!-- FIXME: Which ones - where in the docs -->
+~~~
+process fastqc {
+
+    input:
+    tuple val(sample),path(reads) from read_fqc_ch
+
+    script:
+    """
+    fastqc --threads ${task.cpus} $reads
+    """
+}
+~~~
+{: .language-groovy}
 
 ## Configuration profiles
 
