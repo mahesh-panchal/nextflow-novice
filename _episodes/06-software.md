@@ -3,7 +3,7 @@ title: "Software Package Managers"
 teaching: 0
 exercises: 0
 questions:
-- "How is software managed by nextflow?"
+- "How is software managed?"
 objectives:
 - "Learn how to leverage package managers to handle software requirements"
 keypoints:
