@@ -163,7 +163,7 @@ process {
 
 ## Docker
 
-[Docker](https://www.docker.com/) is container platform that provides a
+[Docker](https://www.docker.com/) is a container platform that provides a
 standardised packaging format known as container images. A container
 image is a unit of software that packages up code and all its
 dependencies so the application runs the same regardless
@@ -269,7 +269,7 @@ process {
     }
 }
 ~~~
-{: .source}
+{: .language-groovy}
 
 > ## Default user
 >
@@ -307,5 +307,45 @@ process {
 
 ## Singularity
 
+[Singularity](https://sylabs.io/docs/) is another container platform,
+but is *root-less* and *daemon-less*, which means it runs as a regular
+user. This platform is often used in compute infrastructures where
+escalated privileges are not-desirable. Singularity can create
+and run containers from both Singularity and Docker images.
+
+A typical command-line usage of a singularity container would be
+like so:
+~~~
+# Start a container based on the image `singularity exec <image>`
+# Run a command `fastqc --version`
+# The image is prefixed with docker:// to denote it's a docker image
+$ singularity exec docker://quay.io/biocontainers/fastqc:0.11.9--0 fastqc --version
+FastQC v0.11.9
+~~~
+{: .language-bash}
+
+Although images definition files can be written for Singularity, writing
+images using Docker allows greater portability of the image.
+However, see `singularity build --help` for image definition syntax.
+
+An additional `singularity` scope is provided by Nextflow
+which allows you to supply extra parameters to Singularity. In order
+to use a container image with Singularity, it must be enabled.   
+~~~
+singularity {
+    enabled = true
+}
+process {
+
+    // available to all processes
+    container = 'quay.io/biocontainers/blast:2.9.0--pl526h3066fca_1'
+
+    // Override the container directive above for a specific process.
+    withName: blastn {
+        container = 'quay.io/biocontainers/blast:2.9.0--pl526h3066fca_4'
+    }
+}
+~~~
+{: .language-groovy}
 
 {% include links.md %}
