@@ -505,8 +505,6 @@ Here is a table of some useful directives.
 | `errorStrategy` | Describes how Nextflow should behave when a process terminates with an error. |
 |-----------+-------------|
 
-<!-- FIXME: Describe more the $task.<property> or remove it from table -->
-
 Directives can be dynamically defined using a closure. In this example
 the executor queue is determined by value of entries.
 
@@ -526,6 +524,32 @@ process foo {
 }
 ~~~
 {: .language-groovy}
+
+### Runtime directive values
+
+Since some directives can be dynamically set based on input properties, it
+would be useful to access what the runtime value would be.
+This is done by accessing the Task Config variables, e.g. `$task.cpus`.
+
+~~~
+process qualimap {
+
+    input:
+    tuple val(sample), path(alignment) from aln_ch
+
+    script:
+    bamfile = alignment.find { it =~ /\.bam$/ }
+    mem = task.memory ? task.memory.toGiga() : task.cpus * 6
+    """
+    export JAVA_OPTS="-Xms32m -Xmx${mem}G -Djava.io.tmpdir=${task.scratch}"
+    qualimap bamqc -bam $bamfile -outdir ${bamfile.baseName} -outformat 'HTML' -nt ${task.cpus}
+    """
+}
+~~~
+
+There is currently no documentation for the different accessible
+variables, so one should just try using the directive name to
+see if it's available.
 
 > ## Exercises
 >
