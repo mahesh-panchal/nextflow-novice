@@ -278,7 +278,8 @@ process {
 > with which the image was built (default: `root`). For life science
 > projects it is rare that tools need to be run with superuser
 > privileges, and often one wants to run tools using the current
-> user. It is helpful to add `runOptions` to the docker configuration
+> user. It is helpful to add your username and group to the
+> `runOptions` in the docker configuration
 > scope like so:
 >
 > ~~~
