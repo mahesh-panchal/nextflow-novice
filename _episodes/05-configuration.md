@@ -30,6 +30,8 @@ overrides `<script_dir>/nextflow.config`, which overrides
 `$HOME/.nextflow/config`. Lastly, command line configuration overrides
 configuration provided from files.
 
+## Configuration scopes
+
 Configuration can be organised into scopes using the curly bracket
 notation or the dot notation. Configuration can also be included
 from another file, which helps to include repeated configuration
@@ -49,6 +51,69 @@ process.cpus = 1
 
 // Include configuration from foo
 includeConfig 'path/foo.config'
+~~~
+{: .language-groovy}
+
+Certain scopes are reserved to have special meaning.
+
+### Scope *params*
+
+The `params` scope allows one to define parameters accessible to
+the workflow script.
+
+Variables defined in the `params` scope are accessible from anywhere
+in the script, but it is better practice to provide them via an input
+declaration after having done appropriate checks on the input.
+~~~
+process echo {
+
+    echo true
+
+    script:
+    """
+    echo ${params.str}
+    """
+}
+~~~
+{: .language-groovy}
+
+An example providing a default value in a configuration file.
+
+~~~
+params.str = 'Hello world'
+~~~
+{: .language-groovy}
+
+Overriding the default value with a command line parameter.
+~~~
+nextflow run script.nf --str "Hello $USER"
+~~~
+
+### Scope *env*
+
+The `env` scope defines variables to be exported in the execution
+environment.
+
+~~~
+env {
+    PATH = "/my/new/tool:$PATH"
+    TOOL_LIB = "/my/new/tool/libs"
+}
+~~~
+{: .language-groovy}
+
+
+### Scope *process*
+
+The `process` scope defines any property described in the
+[documentation](https://www.nextflow.io/docs/latest/process.html#process-directives).
+
+~~~
+process {
+    cpus = 1
+    time = '1h'
+    scratch = true
+}
 ~~~
 {: .language-groovy}
 
