@@ -348,4 +348,16 @@ process {
 ~~~
 {: .language-groovy}
 
+<!-- FIXME: Singularity references -->
+
+## Other container platforms
+
+Nextflow also supports other container platforms such as
+[Podman](https://podman.io/) and
+[Shifter](https://github.com/NERSC/shifter),
+which can be used in the same transparent manner as Docker
+and Singularity.
+
+<!-- FIXME: Podman and Shifter references -->
+
 {% include links.md %}
