@@ -114,7 +114,8 @@ process blastn {
 ~~~
 {: .source}
 
-This will create the environment in the `conda.cacheDir` directory (the default location is the `conda` folder in the working directory).
+This will create the environment in the `conda.cacheDir` directory
+(the default location is the `conda` folder in the working directory).
 
 The use of existing environments is also supported by providing
 the full path to the environment.
@@ -135,7 +136,7 @@ The `conda` directive can also be used in the config file.
 process {
 
     // available to all processes
-    conda = 'cluster-utils/1.2.3'
+    conda = 'gnu-parallel=3.5'
 
     // Override the conda directive above for a specific process.
     withName: blastn {
