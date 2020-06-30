@@ -505,6 +505,7 @@ Here is a table of some useful directives.
 | `errorStrategy` | Describes how Nextflow should behave when a process terminates with an error. |
 |-----------+-------------|
 
+<!-- FIXME: Describe more the $task.<property> or remove it from table -->
 
 Directives can be dynamically defined using a closure. In this example
 the executor queue is determined by value of entries.
