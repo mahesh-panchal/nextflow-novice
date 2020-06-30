@@ -3,11 +3,14 @@ title: "Software Package Managers"
 teaching: 0
 exercises: 0
 questions:
-- "Key question (FIXME)"
+- "How is software managed by nextflow?"
 objectives:
-- "First learning objective. (FIXME)"
+- "Learn how to leverage package managers to handle software requirements"
 keypoints:
-- "First key point. Brief Answer to questions. (FIXME)"
+- "Commands are expected to be available from the shell PATH."
+- "Environment modules can provide centrally managed software environments."
+- "Conda can provide user managed software environments"
+- "Container platforms can provide self-contained software environments."
 ---
 
 ## Software package managers
@@ -24,6 +27,18 @@ preventing the majority of software conflicts.
 Ideally, package management should be handled in the configuration
 file rather than in the nextflow script. This allows users
 to tailor software execution to their computing environment.
+
+> ## Reproducibility
+>
+> Software results can vary depending depending on the execution
+> environment. In order to ensure reproducibility and cross-plaform
+> compatibility across many infrastructures, the use of container
+> technology is recommended. In the absence of a suitable container
+> technology, conda is recommended to manage software installation
+> and dependancies. Although modules and self installed tools are
+> supported, they do not enable ease of use across platforms,
+> creating a potentially high barrier to using the workflow.
+{: .callout}
 
 ## Environment Modules
 
@@ -148,7 +163,7 @@ process {
 
 ## Docker
 
-[Docker](https://www.docker.com/) is platform that provides a
+[Docker](https://www.docker.com/) is container platform that provides a
 standardised packaging format known as container images. A container
 image is a unit of software that packages up code and all its
 dependencies so the application runs the same regardless
@@ -219,7 +234,7 @@ CMD [ "SPADE.py" ]
 ~~~
 {: .source}
 
-When a container image is built, it is stored in a repository, either
+When a container image is built, it is stored in a registry, either
 locally or online. Nextflow is able to retrieve these container images
 when provided with a path to the image and version (tag)
 (`'docker-repository/image-name:tag'`) given by the
@@ -233,7 +248,7 @@ be stored in an online repository to enable access for others.
 > - Red Hat Quay: [https://quay.io/](https://quay.io/)
 > - Biocontainers (Bioconda images): [https://biocontainers.pro/#/](https://biocontainers.pro/#/)
 >
-> Github also supports Docker images using Github packages.
+> Github also supports hosting Docker images using Github packages.
 {: .callout}
 
 An additional `docker` scope is provided by Nextflow
