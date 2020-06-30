@@ -10,7 +10,7 @@ keypoints:
 - "Commands are expected to be available from the shell PATH."
 - "Environment modules can provide centrally managed software environments."
 - "Conda can provide user managed software environments"
-- "Container platforms can provide self-contained software environments."
+- "Container platforms can provide self-contained software environments, and are recommended for reproducibility."
 ---
 
 ## Software package managers
