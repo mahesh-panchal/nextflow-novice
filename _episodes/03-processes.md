@@ -546,6 +546,7 @@ process qualimap {
     """
 }
 ~~~
+{: .language-groovy}
 
 There is currently no documentation for the different accessible
 variables, so one should just try using the directive name to
