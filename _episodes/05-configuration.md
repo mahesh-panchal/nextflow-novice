@@ -170,7 +170,47 @@ manifest {
 
 ## Configuration profiles
 
+[Configuration profiles](https://www.nextflow.io/docs/latest/config.html#config-profiles) define predefined configuration
+settings to be used with the workflow, enabling workflow portability.
+Profiles can include how to manage software, executor settings, or
+computer or institute specific settings, and multiple profiles
+can be used together to provide flexibility of use.
 
+~~~
+profiles {
+
+	/*
+	<profile_name> {
+		<configuration scope1>
+		<configuration scope2>
+		...
+	}
+	*/
+
+	// default profile
+	standard {
+	}
+
+	hal_9000 {
+		process {
+			cpus = 1000
+		}
+	}
+
+	laptop {
+		process {
+			cpus = 1
+		}
+	}
+}
+~~~
+{: .language-groovy}
+
+Profiles are used directly on the command line:
+~~~
+nextflow run -profile <profile1>[,<profile2>,...]` <nextflow_script>
+~~~
+{: .language-bash} 
 
 ## Executor configurations
 
