@@ -505,31 +505,28 @@ Here is a table of some useful directives.
 | `errorStrategy` | Describes how Nextflow should behave when a process terminates with an error. |
 |-----------+-------------|
 
-Directives can be dynamically defined using a closure. In this example
-the executor queue is determined by value of entries.
+Directives can also be dynamically defined using a closure.
 
 ~~~
 process foo {
 
-  executor 'sge'
-  queue { entries > 100 ? 'long' : 'short' }
+    memory { 2.GB * task.attempt }
+    time { 1.hour * task.attempt }
 
-  input:
-  tuple val(entries), path(filename) from data
+    errorStrategy { task.exitStatus in 137..140 ? 'retry' : 'terminate' }
+    maxRetries 3
 
-  script:
-  """
-  < your job here >
-  """
+    script:
+    """
+    <your job here>
+    """
+
 }
 ~~~
 {: .language-groovy}
 
-### Runtime directive values
-
-Since some directives can be dynamically set based on input properties, it
-would be useful to access what the runtime value would be.
-This is done by accessing the Task Config variables, e.g. `$task.cpus`.
+A special variable `task` is accessible to the process block, which
+provides the runtime values of the task directives and more.
 
 ~~~
 process qualimap {
@@ -548,9 +545,8 @@ process qualimap {
 ~~~
 {: .language-groovy}
 
-There is currently no documentation for the different accessible
-variables, so one should just try using the directive name to
-see if it's available.
+The variables available through the task configuration are partially
+documented in the second table in [Tracing Documentation pages](https://www.nextflow.io/docs/latest/tracing.html#trace-report).
 
 > ## Exercises
 >
