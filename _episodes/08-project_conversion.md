@@ -7,6 +7,7 @@ questions:
 objectives:
 - "Learn how to structure an analysis"
 - "Learn how to continue the analysis"
+- "Learn how to test your workflow"
 keypoints:
 - "Use an organised folder structure."
 - "Start by making process templates for code."
