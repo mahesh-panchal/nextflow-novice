@@ -234,7 +234,7 @@ available on the command line. While local execution is suitable for
 small scale data processing, Nextflow integrates support for several
 third-party softwares enabling large scale data processing through
 various package management tools, job schedulers, and distributed
-compute infrastructure tools (See supplementary materials).
+compute infrastructure tools, covered later on.
 
 ~~~
 $ nextflow run example.nf
@@ -257,6 +257,21 @@ repository and other settings can be configured as described in the
 discussed in more detail in the
 [Configuration]({{ page.root }}{% link _episodes/05-configuration.md %})
 section.
+
+Parameters to both Nextflow and the pipeline script can also
+be passed on the command line (Use `nextflow help run` to see all
+all the available Nextflow options).
+
+~~~
+# nextflow run -c <config> <workflow_script> --<workflow_parameter> <value>
+nextflow run -c nxf.conf my_workflow.nf --welcome_message hello
+~~~
+{: .language-bash}
+
+Parameters to the Nextflow workflow engine are prefixed with a single
+dash `-`, while parameters used in the workflow script are prefixed
+with a double dash `--`. Additional information on parameter passing is
+provided later.
 
 > ## Run your own workflows
 >
