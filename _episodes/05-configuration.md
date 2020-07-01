@@ -74,6 +74,20 @@ process echo {
     echo ${params.str}
     """
 }
+
+params.fasta = ''
+Channel.fromPath(params.fasta, checkIfexists: true).set { fa_ch }
+
+process index_fasta {
+
+    input:
+    path fasta from fa_ch
+
+    script:
+    """
+    samtools faidx $fasta
+    """
+}
 ~~~
 {: .language-groovy}
 
