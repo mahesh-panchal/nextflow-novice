@@ -124,13 +124,28 @@ env {
 ### Scope *process*
 
 The `process` scope defines any property described in the
-[documentation](https://www.nextflow.io/docs/latest/process.html#process-directives).
+[Process directives documentation](https://www.nextflow.io/docs/latest/process.html#process-directives).
 
 ~~~
 process {
     cpus = 1
     time = '1h'
     scratch = true
+}
+~~~
+{: .language-groovy}
+
+The selectors `withName: <process_name>` and `withLabel: <label>`
+can be used to provide configurations to specific processes.
+
+~~~
+process {
+    withName: 'index_fasta' {
+        cpus = 1
+    }
+    withLabel: 'bigMem' {
+        memory = 256.GB
+    }
 }
 ~~~
 {: .language-groovy}
