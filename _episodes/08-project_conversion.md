@@ -11,6 +11,7 @@ keypoints:
 - "Use an organised folder structure."
 - "Start by making process templates for code."
 - "Refactor once the workflow logic is in place."
+- "Make a test data set."
 ---
 
 FIXME
