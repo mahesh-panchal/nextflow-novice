@@ -54,11 +54,12 @@ includeConfig 'path/foo.config'
 ~~~
 {: .language-groovy}
 
-Certain scopes are reserved to have special meaning.
+Certain [scopes](https://www.nextflow.io/docs/latest/config.html#config-scopes) are reserved to have special meaning. Only some are
+described here.
 
 ### Scope *params*
 
-The `params` scope allows one to define parameters accessible to
+The [`params` scope](https://www.nextflow.io/docs/latest/config.html#scope-params) allows one to define parameters accessible to
 the workflow script.
 
 ~~~
@@ -109,7 +110,7 @@ nextflow run script.nf --str "Hello $USER"
 
 ### Scope *env*
 
-The `env` scope defines variables to be exported in the execution
+The [`env` scope](https://www.nextflow.io/docs/latest/config.html#scope-env) defines variables to be exported in the execution
 environment.
 
 ~~~
@@ -123,7 +124,7 @@ env {
 
 ### Scope *process*
 
-The `process` scope defines any property described in the
+The [`process` scope](https://www.nextflow.io/docs/latest/config.html#scope-process) defines any property described in the
 [Process directives documentation](https://www.nextflow.io/docs/latest/process.html#process-directives).
 
 ~~~
@@ -153,8 +154,25 @@ process {
 [Selector expressions](https://www.nextflow.io/docs/latest/config.html#selector-expressions) can be used to group process
 selections or negate them.
 
+### Scope *manifest*
+
+The [`manifest` scope](https://www.nextflow.io/docs/latest/config.html#scope-manifest) provides metadata for your workflow.
+
+~~~
+manifest {
+    homePage = 'http://foo.com'
+    description = 'Pipeline does this and that'
+    mainScript = 'foo.nf'
+    version = '1.0.0'
+}
+~~~
+{: .language-groovy}
+
 ## Configuration profiles
 
+
+
+## Executor configurations
 
 
 
