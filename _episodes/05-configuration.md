@@ -150,6 +150,9 @@ process {
 ~~~
 {: .language-groovy}
 
+[Selector expressions](https://www.nextflow.io/docs/latest/config.html#selector-expressions) can be used to group process
+selections or negate them.
+
 ## Configuration profiles
 
 
