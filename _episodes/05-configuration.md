@@ -61,6 +61,14 @@ Certain scopes are reserved to have special meaning.
 The `params` scope allows one to define parameters accessible to
 the workflow script.
 
+~~~
+params {
+    str = "Hello"
+    fasta = '/path/to/fasta'
+}
+~~~
+{: .language-groovy}
+
 Variables defined in the `params` scope are accessible from anywhere
 in the script, but it is better practice to provide them via an input
 declaration after having done appropriate checks on the input.
@@ -75,7 +83,6 @@ process echo {
     """
 }
 
-params.fasta = ''
 Channel.fromPath(params.fasta, checkIfexists: true).set { fa_ch }
 
 process index_fasta {
@@ -91,17 +98,14 @@ process index_fasta {
 ~~~
 {: .language-groovy}
 
-An example providing a default value in a configuration file.
+As described above, the configured value can be overriden with
+a command line parameter, or using another configuration file provided
+with `-c`.
 
-~~~
-params.str = 'Hello world'
-~~~
-{: .language-groovy}
-
-Overriding the default value with a command line parameter.
 ~~~
 nextflow run script.nf --str "Hello $USER"
 ~~~
+{: .language-bash}
 
 ### Scope *env*
 
